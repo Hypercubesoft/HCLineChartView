@@ -8,7 +8,7 @@
 
 **HCLineChartView** is a beautiful iOS library for drawing line charts. It is highly customizable and easy to use. 
 
-# Examples of usage:
+## Examples of usage:
 
 HCLineChartView provides a lot of possibilities to define the desired design of the chart. There are some examples of usage:
 
@@ -18,7 +18,7 @@ HCLineChartView provides a lot of possibilities to define the desired design of 
 ![GitHub Logo](Images/Screenshots/HCLineChartView-Screenshot-4.jpg)
 ![GitHub Logo](Images/Screenshots/HCLineChartView-Screenshot-5.jpg)
 
-# Features:
+## Features:
 * Easy to set up
 * Easy to change chart line design, i.e. multiple chart line attributes (title, subtitle, colors, gradients, chart line or axis width, font size, ...)
 * Easy to set chart data and reload the chart
@@ -26,9 +26,13 @@ HCLineChartView provides a lot of possibilities to define the desired design of 
 * Automatic calculating positions and values for ticks for both axes based on chart data and chart frame.
 * Automatic redrawing on size or orientation change events, without distortions.
 
-# Installation:
+## Installing
 
-## CocoaPods:
+### Podfile
+
+[CocoaPods](https://cocoapods.org/) is a dependency manager for Objective-C and Swift, which automates and simplifies the process of using 3rd-party libraries like HCLineChartView in your projects.<br><br>
+To integrate **HCLineChartView** into your Xcode project using CocoaPods, specify it in your Podfile:
+
 ```Ruby
 target '<TargetName>' do
     use_frameworks!
@@ -36,10 +40,17 @@ target '<TargetName>' do
 end
 ```
 
-## Manual:
+Then, run the following command:
+
+```
+$ pod install
+```
+
+### With source code
+
 If you prefer not to use CocoaPods as a dependency manager, you can integrate HCLineChartView into your project manually. Just download repository and include Source/HCLineChartView folder into your project.
 
-# Usage 
+## Usage 
 
 1. Add HCLineChartView library to your project via CocoaPods or manually.
 2. Include HCLineChartView library where it is needed:
@@ -113,13 +124,13 @@ If you prefer not to use CocoaPods as a dependency manager, you can integrate HC
 
 In any case, you can download and run sample project from this repository. In this project, you can find an example of usage which you can use as a template for your projects. This example includes some additional helper classes (HCChartSettings, HCChartData) and additional HCChartLineView methods inside HCLineChartView+SettingsManager category which could help you to better organize your code.
 
-# Short preview of HCChartLineView basic parameters and methods
+## Short preview of HCChartLineView basic parameters and methods
 
 For the better understanding how to use those parameters and methods, here is the short overview of basic HCChartLineView attributes and methods which you can use to setup chart. 
 
-## HCChartLineView basic attributes
+### HCChartLineView basic attributes
 
-### Chart Background Settings
+#### Chart Background Settings
 ```objective-c
 /// This property defines if chart background is transparent or not.
 @property IBInspectable BOOL chartTransparentBackground;
@@ -137,7 +148,7 @@ For the better understanding how to use those parameters and methods, here is th
 @property IBInspectable BOOL chartWithRoundedCorners;
 ```
 
-### Title and Subtitle Settings
+#### Title and Subtitle Settings
 ```objective-c
 @property (retain, nonatomic) IBInspectable NSString* chartTitle;
 
@@ -160,7 +171,7 @@ For the better understanding how to use those parameters and methods, here is th
 @property (retain, nonatomic) IBInspectable UIColor* chartSubtitleColor;
 ```
 
-### Chart Axis Settings
+#### Chart Axis Settings
 
 ```objective-c
 /// This property defines chart axes color.
@@ -188,7 +199,7 @@ For the better understanding how to use those parameters and methods, here is th
 @property IBInspectable BOOL drawHorizontalLinesForYTicks;
 ```
 
-### Chart Line Settings
+#### Chart Line Settings
 ```objective-c
 /// This property defines chart line width.
 @property IBInspectable float chartLineWidth;
@@ -215,7 +226,7 @@ For the better understanding how to use those parameters and methods, here is th
 @property IBInspectable BOOL isValueChartWithRealXAxisDistribution;
 ```
 
-### Chart Line Data
+#### Chart Line Data
 ```objective-c
 /// It is recommended to provide already sorted data before drawing the chart. If you don't have values for X axis sorted ascending, you can set this parameter to YES. In that case, provided values for X axis (xElements) will be sorted ascending, with the parallel sorting of paired values for Y axis (yElements). Sorting data could have a small impact on chart drawing performance.
 @property IBInspectable BOOL sortData;
@@ -228,8 +239,8 @@ For the better understanding how to use those parameters and methods, here is th
 ```
 By changing these arrays you actually change chart rate data.
 
-## HCChartLineView Methods
-### Drawing and Updating Methods
+### HCChartLineView Methods
+#### Drawing and Updating Methods
 ```objective-c
 /// Draws/redraws chart with current data and settings.
 -(void)drawChart;
@@ -240,7 +251,7 @@ By changing these arrays you actually change chart rate data.
 -(void)updateChartWithXElements:(NSArray*)xElements yElements:(NSArray*)yElements;
 ```
 
-# Notes
+## Notes
 * Parameter should have reasonable values. For example. ```chartWithCircles``` parameter should be set to YES only when you have small amount of data. If you have big amount of data, those circles will overlap. Also, ```chartLineWidth``` shouldn't be too big. The same goes for the others.
 * It's obvious that some attributes turn off some others. For example, if *showSubtitle* is set to NO the subtitle will be hidden, whatever text you set as a *chartSubTitle*. Also, for example, if you set transparent background, you'll not see background gradient, even if you set it.
 * Only NSNumber or NSDate values are allowed for X axis and only NSNumber values for Y axis.
@@ -250,6 +261,6 @@ By changing these arrays you actually change chart rate data.
 
 If you find any bug, please report it, and we will try to fix it ASAP. Also, any suggestion is welcome.
 
-# Credits
+## Credits
 
 **HCLineChartView** is owned and maintained by the [Hypercube](http://hypercubesoft.com/).
