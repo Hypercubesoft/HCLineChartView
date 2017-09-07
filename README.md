@@ -53,12 +53,12 @@ If you prefer not to use CocoaPods as a dependency manager, you can integrate HC
     ```objective-c
     @property (strong, nonatomic) IBOutlet HCLinearChartView *hcLinearChartView;
     ```
-You can also add this view from code, like any other view:
+    You can also add this view from code, like any other view:
 
-   ```objective-c
-   HCLinearChartView* hcLinearChartView = [[HCLinearChartView alloc] initWithFrame:CGRectMake(100, 100, 300, 300)];
+    ```objective-c
+    HCLinearChartView* hcLinearChartView = [[HCLinearChartView alloc] initWithFrame:CGRectMake(100, 100, 300, 300)];
     [self.view addSubview:hcLinearChartView];
-   ```
+    ```
 
 5. If you want to change chart line appearance and basic settings, you can setup chart settings in Interface Builder or from code. You don't have to change these parameters. In that case, the chart will be drawn with default settings. If you still want to customize the chart, you can change multiple attributes (title, subtitle, colors, corner radius, ...) directly from the storyboard or xib file. Also, you can change desired properties directly from the code, like in the following example:
 
