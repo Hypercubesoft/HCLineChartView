@@ -3,7 +3,11 @@
 [![License](https://img.shields.io/cocoapods/l/HCLinearChartView.svg?style=flat)](http://cocoapods.org/pods/HCLinearChartView)
 [![Platform](https://img.shields.io/cocoapods/p/HCLinHCLinearChartViewearChart.svg?style=flat)](http://cocoapods.org/pods/HCLinearChartView)
 
-**HCLinearChartView** is a beautiful iOS library for drawing linear charts. It is highly customizable and easy to use.  
+**HCLinearChartView** is a beautiful iOS library for drawing linear charts. It is highly customizable and easy to use. 
+
+# Examples of usage:
+
+HCLinearChartView provides a lot of possibilities to define the desired design of the chart. There are some examples of usage:
 
 ![GitHub Logo](Images/Screenshots/HCLinearChartView-Screenshot-1.jpg)
 ![GitHub Logo](Images/Screenshots/HCLinearChartView-Screenshot-2.jpg)
