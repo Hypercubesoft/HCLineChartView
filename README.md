@@ -88,14 +88,14 @@ If you prefer not to use CocoaPods as a dependency manager, you can integrate HC
    If you want to show time on the X axis, you should populate ```xElements``` array with NSDate instances, like in this example:
    ```objective-c
    self.hcLineChartView.xElements = [[NSMutableArray alloc] initWithObjects:
-   [NSDate dateWithTimeIntervalSince1970:1504785810],
-   [NSDate dateWithTimeIntervalSince1970:1504795873],
-   [NSDate dateWithTimeIntervalSince1970:1504805270],
-   [NSDate dateWithTimeIntervalSince1970:1504815840],
-   [NSDate dateWithTimeIntervalSince1970:1504825810],
-   [NSDate dateWithTimeIntervalSince1970:1504835873],
-   [NSDate dateWithTimeIntervalSince1970:1504845270],
-   [NSDate dateWithTimeIntervalSince1970:1504855840], NULL];
+                                        [NSDate dateWithTimeIntervalSince1970:1504785810],
+                                        [NSDate dateWithTimeIntervalSince1970:1504795873],
+                                        [NSDate dateWithTimeIntervalSince1970:1504805270],
+                                        [NSDate dateWithTimeIntervalSince1970:1504815840],
+                                        [NSDate dateWithTimeIntervalSince1970:1504825810],
+                                        [NSDate dateWithTimeIntervalSince1970:1504835873],
+                                        [NSDate dateWithTimeIntervalSince1970:1504845270],
+                                        [NSDate dateWithTimeIntervalSince1970:1504855840], NULL];
     ```
    
 6. Draw/redraw the chart. <br>After changing the attributes or after updating chart data, you have to redraw the chart:
