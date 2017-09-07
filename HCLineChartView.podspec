@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
 s.platform = :ios
 s.name             = "HCLineChartView"
 s.version          = "1.0.0"
-s.summary          = "HCLineChartView is an iOS library for drawing linear charts."
+s.summary          = "HCLineChartView is an iOS library for drawing line charts."
 
 s.description      = <<-DESC
 HCLineChartView is a beautiful iOS library for drawing line charts. It is customizable and easy to use.
