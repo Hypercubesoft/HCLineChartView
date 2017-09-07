@@ -1,22 +1,22 @@
 
-[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/HCLinearChartView.svg)](http://cocoapods.org/pods/HCLinearChartView)
-[![License](https://img.shields.io/cocoapods/l/HCLinearChartView.svg?style=flat)](http://cocoapods.org/pods/HCLinearChartView)
-[![Platform](https://img.shields.io/cocoapods/p/HCLinHCLinearChartViewearChart.svg?style=flat)](http://cocoapods.org/pods/HCLinearChartView)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/HCLineChartView.svg)](http://cocoapods.org/pods/HCLineChartView)
+[![License](https://img.shields.io/cocoapods/l/HCLineChartView.svg?style=flat)](http://cocoapods.org/pods/HCLineChartView)
+[![Platform](https://img.shields.io/cocoapods/p/HCLineChartView.svg?style=flat)](http://cocoapods.org/pods/HCLineChartView)
 ![Objective-c](https://img.shields.io/badge/in-Objective--C-green.svg)
 
-![GitHub Logo](Images/HCLinearChartView-Logo.png)
+![GitHub Logo](Images/HCLineChartView-Logo.png)
 
-**HCLinearChartView** is a beautiful iOS library for drawing linear charts. It is highly customizable and easy to use. 
+**HCLineChartView** is a beautiful iOS library for drawing line charts. It is highly customizable and easy to use. 
 
 # Examples of usage:
 
-HCLinearChartView provides a lot of possibilities to define the desired design of the chart. There are some examples of usage:
+HCLineChartView provides a lot of possibilities to define the desired design of the chart. There are some examples of usage:
 
-![GitHub Logo](Images/Screenshots/HCLinearChartView-Screenshot-1.jpg)
-![GitHub Logo](Images/Screenshots/HCLinearChartView-Screenshot-2.jpg)
-![GitHub Logo](Images/Screenshots/HCLinearChartView-Screenshot-3.jpg)
-![GitHub Logo](Images/Screenshots/HCLinearChartView-Screenshot-4.jpg)
-![GitHub Logo](Images/Screenshots/HCLinearChartView-Screenshot-5.jpg)
+![GitHub Logo](Images/Screenshots/HCLineChartView-Screenshot-1.jpg)
+![GitHub Logo](Images/Screenshots/HCLineChartView-Screenshot-2.jpg)
+![GitHub Logo](Images/Screenshots/HCLineChartView-Screenshot-3.jpg)
+![GitHub Logo](Images/Screenshots/HCLineChartView-Screenshot-4.jpg)
+![GitHub Logo](Images/Screenshots/HCLineChartView-Screenshot-5.jpg)
 
 # Features:
 * Easy to set up
@@ -32,86 +32,86 @@ HCLinearChartView provides a lot of possibilities to define the desired design o
 ```Ruby
 target '<TargetName>' do
     use_frameworks!
-    pod 'HCLinearChartView'
+    pod 'HCLineChartView'
 end
 ```
 
 ## Manual:
-If you prefer not to use CocoaPods as a dependency manager, you can integrate HCLinearChartView into your project manually. Just download repository and include Source/HCLinearChartView folder into your project.
+If you prefer not to use CocoaPods as a dependency manager, you can integrate HCLineChartView into your project manually. Just download repository and include Source/HCLineChartView folder into your project.
 
 # Usage 
 
-1. Add HCLinearChartView library to your project via CocoaPods or manually.
-2. Include HCLinearChartView library where it is needed:
+1. Add HCLineChartView library to your project via CocoaPods or manually.
+2. Include HCLineChartView library where it is needed:
 
     ```objective-c
-    #include <HCLinearChartView/HCLinearChartView.h>
+    #include <HCLineChartView/HCLineChartView.h>
     ```
-3. Place a UIView into your .storyboard or .xib file and define HCLinearChartView as its class:
+3. Place a UIView into your .storyboard or .xib file and define HCLineChartView as its class:
 
-    ![GitHub Logo](Images/Screenshots/HCLinearChartView-Storyboard-Screenshot.png)
+    ![GitHub Logo](Images/Screenshots/HCLineChartView-Storyboard-Screenshot.png)
     
-    Also, create the outlet for this HCLinearChartView in the appropriate file. 
+    Also, create the outlet for this HCLineChartView in the appropriate file. 
 
     ```objective-c
-    @property (strong, nonatomic) IBOutlet HCLinearChartView *hcLinearChartView;
+    @property (strong, nonatomic) IBOutlet HCLineChartView *hcLineChartView;
     ```
     You can also add this view from code, like any other view:
 
     ```objective-c
-    HCLinearChartView* hcLinearChartView = [[HCLinearChartView alloc] initWithFrame:CGRectMake(100, 100, 300, 300)];
-    [self.view addSubview:hcLinearChartView];
+    HCLineChartView* hcLineChartView = [[HCLineChartView alloc] initWithFrame:CGRectMake(100, 100, 300, 300)];
+    [self.view addSubview: hcLineChartView];
     ```
 
 5. If you want to change chart line appearance and basic settings, you can setup chart settings in Interface Builder or from code. You don't have to change these parameters. In that case, the chart will be drawn with default settings. If you still want to customize the chart, you can change multiple attributes (title, subtitle, colors, corner radius, ...) directly from the storyboard or xib file. Also, you can change desired properties directly from the code, like in the following example:
 
    ```objective-c
-    self.hcLinearChartView.chartTitle = @"Revenue over time";
-    self.hcLinearChartView.chartTitleColor = [UIColor yellowColor];
-    self.hcLinearChartView.showSubtitle = NO;
-    self.hcLinearChartView.chartGradient = YES;
-    self.hcLinearChartView.backgroundGradientTopColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.5 alpha:1.0];
-    self.hcLinearChartView.backgroundGradientBottomColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.3 alpha:1.0];
-    self.hcLinearChartView.chartLineColor = [UIColor yellowColor];
-    self.hcLinearChartView.chartAxisColor = [UIColor yellowColor];
-    self.hcLinearChartView.chartGradientUnderline = YES;
-    self.hcLinearChartView.underLineChartGradientTopColor = [UIColor yellowColor];
-    self.hcLinearChartView.underLineChartGradientBottomColor = [UIColor orangeColor];
+    self.hcLineChartView.chartTitle = @"Revenue over time";
+    self.hcLineChartView.chartTitleColor = [UIColor yellowColor];
+    self.hcLineChartView.showSubtitle = NO;
+    self.hcLineChartView.chartGradient = YES;
+    self.hcLineChartView.backgroundGradientTopColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.5 alpha:1.0];
+    self.hcLineChartView.backgroundGradientBottomColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.3 alpha:1.0];
+    self.hcLineChartView.chartLineColor = [UIColor yellowColor];
+    self.hcLineChartView.chartAxisColor = [UIColor yellowColor];
+    self.hcLineChartView.chartGradientUnderline = YES;
+    self.hcLineChartView.underLineChartGradientTopColor = [UIColor yellowColor];
+    self.hcLineChartView.underLineChartGradientBottomColor = [UIColor orangeColor];
     ```
     You can set all other parameters in the same way.
 5. Setup or update chart data:
 
    ```objective-c
-   self.hcLinearChartView.xElements = [[NSMutableArray alloc] initWithObjects:@(10),@(20),@(25),@(30),@(40),@(45),@(60),@(65),@(70),@(75),@(80),@(85),@(100),@(120),@(125),@(130),@(145),@(150),@(155),@(165),@(175),@(185),@(195),@(200), nil];
-   self.hcLinearChartView.yElements = [[NSMutableArray alloc] initWithObjects:@(210),@(222),@(212),@(216),@(232),@(247),@(262),@(261),@(276),@(274),@(281),@(288),@(290),@(283),@(242),@(250),@(270),@(265),@(260),@(262),@(277),@(272),@(281),@(289), nil];
+   self.hcLineChartView.xElements = [[NSMutableArray alloc] initWithObjects:@(10),@(20),@(25),@(30),@(40),@(45),@(60),@(65),@(70),@(75),@(80),@(85),@(100),@(120),@(125),@(130),@(145),@(150),@(155),@(165),@(175),@(185),@(195),@(200), nil];
+   self.hcLineChartView.yElements = [[NSMutableArray alloc] initWithObjects:@(210),@(222),@(212),@(216),@(232),@(247),@(262),@(261),@(276),@(274),@(281),@(288),@(290),@(283),@(242),@(250),@(270),@(265),@(260),@(262),@(277),@(272),@(281),@(289), nil];
    ```
    If you want to show time on the X axis, you should populate ```xElements``` array with NSDate instances, like in this example:
    ```objective-c
-   self.hcLinearChartView.xElements = [[NSMutableArray alloc] initWithObjects:
-                                        [NSDate dateWithTimeIntervalSince1970:1504785810],
-                                        [NSDate dateWithTimeIntervalSince1970:1504795873],
-                                        [NSDate dateWithTimeIntervalSince1970:1504805270],
-                                        [NSDate dateWithTimeIntervalSince1970:1504815840],
-                                        [NSDate dateWithTimeIntervalSince1970:1504825810],
-                                        [NSDate dateWithTimeIntervalSince1970:1504835873],
-                                        [NSDate dateWithTimeIntervalSince1970:1504845270],
-                                        [NSDate dateWithTimeIntervalSince1970:1504855840], NULL];
+   self.hcLineChartView.xElements = [[NSMutableArray alloc] initWithObjects:
+   [NSDate dateWithTimeIntervalSince1970:1504785810],
+   [NSDate dateWithTimeIntervalSince1970:1504795873],
+   [NSDate dateWithTimeIntervalSince1970:1504805270],
+   [NSDate dateWithTimeIntervalSince1970:1504815840],
+   [NSDate dateWithTimeIntervalSince1970:1504825810],
+   [NSDate dateWithTimeIntervalSince1970:1504835873],
+   [NSDate dateWithTimeIntervalSince1970:1504845270],
+   [NSDate dateWithTimeIntervalSince1970:1504855840], NULL];
     ```
    
 6. Draw/redraw the chart. <br>After changing the attributes or after updating chart data, you have to redraw the chart:
 
    ```objective-c
-   [self.hcLinearChartView drawChart];
+   [self.hcLineChartView drawChart];
    ```
    Also, if you want to update chart data and redraw the chart, you can use updateChartWithData method:
    
    ```objective-c
     NSMutableArray* xElements = [[NSMutableArray alloc] initWithObjects:@(10),@(20),@(25),@(30),@(40),@(45),@(60),@(65),@(70),@(75),@(80),@(85),@(100),@(120),@(125),@(130),@(145),@(150),@(155),@(165),@(175),@(185),@(195),@(200), nil];
     NSMutableArray* yElements = [[NSMutableArray alloc] initWithObjects:@(210),@(222),@(212),@(216),@(232),@(247),@(262),@(261),@(276),@(274),@(281),@(288),@(290),@(283),@(242),@(250),@(270),@(265),@(260),@(262),@(277),@(272),@(281),@(289), nil];
-    [self.hcLinearChartView updateChartWithXElements:xElements yElements:yElements];
+    [self.hcLineChartView updateChartWithXElements:xElements yElements:yElements];
     ```
 
-In any case, you can download and run sample project from this repository. In this project, you can find an example of usage which you can use as a template for your projects. This example includes some additional helper classes (HCChartSettings, HCChartData) and additional HCChartLineView methods inside HCLinearChartView+SettingsManager category which could help you to better organize your code.
+In any case, you can download and run sample project from this repository. In this project, you can find an example of usage which you can use as a template for your projects. This example includes some additional helper classes (HCChartSettings, HCChartData) and additional HCChartLineView methods inside HCLineChartView+SettingsManager category which could help you to better organize your code.
 
 # Short preview of HCChartLineView basic parameters and methods
 
@@ -245,11 +245,11 @@ By changing these arrays you actually change chart rate data.
 * It's obvious that some attributes turn off some others. For example, if *showSubtitle* is set to NO the subtitle will be hidden, whatever text you set as a *chartSubTitle*. Also, for example, if you set transparent background, you'll not see background gradient, even if you set it.
 * Only NSNumber or NSDate values are allowed for X axis and only NSNumber values for Y axis.
 * Provided values for X axis should be in ascending order. If they aren't or you want to be sure that they are sorted ascending, you should set sortData parameter to YES.
-* You should set a bigger frame for your HCLinearChartView, i.e. big enough to draw chart line, both axes, and other elements. Minimal frame depends on chart settings (font size, chart data, the orientation of values on X axis (horizontal or vertical),...).
+* You should set a bigger frame for your HCLineChartView, i.e. big enough to draw chart line, both axes, and other elements. Minimal frame depends on chart settings (font size, chart data, the orientation of values on X axis (horizontal or vertical),...).
 
 
 If you find any bug, please report it, and we will try to fix it ASAP. Also, any suggestion is welcome.
 
 # Credits
 
-**HCLinearChartView** is owned and maintained by the [Hypercube](http://hypercubesoft.com/).
+**HCLineChartView** is owned and maintained by the [Hypercube](http://hypercubesoft.com/).
