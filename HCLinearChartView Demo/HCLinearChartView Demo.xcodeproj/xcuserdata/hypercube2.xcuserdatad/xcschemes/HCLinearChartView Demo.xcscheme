@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A53DA62C1F613F3D0089CFF2"
-               BuildableName = "HCLinearChartView.app"
-               BlueprintName = "HCLinearChartView"
-               ReferencedContainer = "container:HCLinearChartView.xcodeproj">
+               BuildableName = "HCLinearChartView Demo.app"
+               BlueprintName = "HCLinearChartView Demo"
+               ReferencedContainer = "container:HCLinearChartView Demo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A53DA62C1F613F3D0089CFF2"
-            BuildableName = "HCLinearChartView.app"
-            BlueprintName = "HCLinearChartView"
-            ReferencedContainer = "container:HCLinearChartView.xcodeproj">
+            BuildableName = "HCLinearChartView Demo.app"
+            BlueprintName = "HCLinearChartView Demo"
+            ReferencedContainer = "container:HCLinearChartView Demo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A53DA62C1F613F3D0089CFF2"
-            BuildableName = "HCLinearChartView.app"
-            BlueprintName = "HCLinearChartView"
-            ReferencedContainer = "container:HCLinearChartView.xcodeproj">
+            BuildableName = "HCLinearChartView Demo.app"
+            BlueprintName = "HCLinearChartView Demo"
+            ReferencedContainer = "container:HCLinearChartView Demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A53DA62C1F613F3D0089CFF2"
-            BuildableName = "HCLinearChartView.app"
-            BlueprintName = "HCLinearChartView"
-            ReferencedContainer = "container:HCLinearChartView.xcodeproj">
+            BuildableName = "HCLinearChartView Demo.app"
+            BlueprintName = "HCLinearChartView Demo"
+            ReferencedContainer = "container:HCLinearChartView Demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

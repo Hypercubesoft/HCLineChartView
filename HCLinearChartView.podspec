@@ -15,6 +15,6 @@ s.author           = { "Hypercubesoft" => "office@hypercubesoft.com" }
 s.source           = { :git => "https://github.com/Hypercubesoft/HCLinearChartView.git", :tag => "#{s.version}"}
 
 s.ios.deployment_target = "8.0"
-s.source_files = "HCLinearChartView/HCLinearChartView/Source/HCLinearChartView/*"
+s.source_files = "Source/HCLinearChartView", "Source/HCLinearChartView/**/*"
 
 end

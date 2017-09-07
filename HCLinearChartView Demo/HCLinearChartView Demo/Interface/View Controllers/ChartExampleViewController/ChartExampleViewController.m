@@ -39,7 +39,7 @@
 {
     [self.navigationController.navigationBar setTranslucent:YES];
     
-    UIButton *leftImageButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 107, 25)];
+    UIButton *leftImageButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 136, 25)];
     [leftImageButton setBackgroundImage:[UIImage imageNamed:@"hcLinearChartLogo"] forState:UIControlStateNormal];
     [leftImageButton setUserInteractionEnabled:NO];
     UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftImageButton];
