@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsTextCell" id="X5j-ci-bW8" customClass="SettingsTextCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X5j-ci-bW8" id="IKf-Fk-h5Q">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chart title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qn1-JV-oJU">
+                        <rect key="frame" x="10" y="11" width="76" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nP0-62-gNF" userLabel="Cell Text Field Holder" customClass="RoundViewWithBorder">
+                        <rect key="frame" x="182" y="7" width="128" height="30"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Chart title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Srn-Db-v1J">
+                                <rect key="frame" x="0.5" y="0.0" width="128" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="1Gj-eg-otX"/>
+                            <constraint firstItem="Srn-Db-v1J" firstAttribute="height" secondItem="nP0-62-gNF" secondAttribute="height" id="DOe-Zm-ozh"/>
+                            <constraint firstItem="Srn-Db-v1J" firstAttribute="width" secondItem="nP0-62-gNF" secondAttribute="width" id="XTw-E9-ydr"/>
+                            <constraint firstItem="Srn-Db-v1J" firstAttribute="centerX" secondItem="nP0-62-gNF" secondAttribute="centerX" id="aTw-6w-ld4"/>
+                            <constraint firstItem="Srn-Db-v1J" firstAttribute="centerY" secondItem="nP0-62-gNF" secondAttribute="centerY" id="fbd-HK-kEx"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderIBColor">
+                                <color key="value" red="0.031372549020000001" green="0.63137254899999995" blue="0.94901960780000005" alpha="1" colorSpace="deviceRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="nP0-62-gNF" firstAttribute="centerY" secondItem="IKf-Fk-h5Q" secondAttribute="centerY" id="FrB-lt-P7M"/>
+                    <constraint firstItem="qn1-JV-oJU" firstAttribute="leading" secondItem="IKf-Fk-h5Q" secondAttribute="leading" constant="10" id="KQo-k8-uFV"/>
+                    <constraint firstAttribute="trailing" secondItem="nP0-62-gNF" secondAttribute="trailing" constant="10" id="N7m-ma-dsi"/>
+                    <constraint firstItem="qn1-JV-oJU" firstAttribute="centerY" secondItem="IKf-Fk-h5Q" secondAttribute="centerY" id="Rsi-dW-4WH"/>
+                    <constraint firstItem="nP0-62-gNF" firstAttribute="width" secondItem="IKf-Fk-h5Q" secondAttribute="width" multiplier="0.4" id="aak-V7-aOA"/>
+                    <constraint firstItem="nP0-62-gNF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qn1-JV-oJU" secondAttribute="trailing" constant="5" id="eQz-GL-FnA"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="cellLabel" destination="qn1-JV-oJU" id="99i-Nj-Htz"/>
+                <outlet property="cellTextField" destination="Srn-Db-v1J" id="6vl-B9-KWX"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

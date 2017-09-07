@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="meL-Uj-lxN">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Chart Example View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="ChartExampleViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ChartExampleViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ulu-PG-mnR" userLabel="Chart ScrollView Holder View">
+                                <rect key="frame" x="0.0" y="64" width="320" height="336"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zUt-cq-xwv" userLabel="Scroll View for Chart">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="336"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PNA-dn-jyc" userLabel="Holder View for Chart">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="336"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwN-Zs-mGJ" customClass="HCLinearChartView">
+                                                        <rect key="frame" x="10" y="10" width="300" height="316"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="chartTitle" value="Chart title"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="qwN-Zs-mGJ" firstAttribute="centerX" secondItem="PNA-dn-jyc" secondAttribute="centerX" id="0zV-RR-9zO"/>
+                                                    <constraint firstItem="qwN-Zs-mGJ" firstAttribute="width" secondItem="PNA-dn-jyc" secondAttribute="width" constant="-20" id="Ea6-Df-B9y"/>
+                                                    <constraint firstItem="qwN-Zs-mGJ" firstAttribute="height" secondItem="PNA-dn-jyc" secondAttribute="height" constant="-20" id="VWR-b4-JPk"/>
+                                                    <constraint firstItem="qwN-Zs-mGJ" firstAttribute="centerY" secondItem="PNA-dn-jyc" secondAttribute="centerY" id="gvQ-Ar-aQg"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="mBD-qt-Bkf"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="PNA-dn-jyc" firstAttribute="width" secondItem="zUt-cq-xwv" secondAttribute="width" id="G7z-mF-6jg"/>
+                                            <constraint firstAttribute="trailing" secondItem="PNA-dn-jyc" secondAttribute="trailing" id="Q5C-zL-M5w"/>
+                                            <constraint firstItem="PNA-dn-jyc" firstAttribute="top" secondItem="zUt-cq-xwv" secondAttribute="top" id="SQD-p9-KGj"/>
+                                            <constraint firstItem="PNA-dn-jyc" firstAttribute="leading" secondItem="zUt-cq-xwv" secondAttribute="leading" id="Ub3-hl-EgU"/>
+                                            <constraint firstAttribute="bottom" secondItem="PNA-dn-jyc" secondAttribute="bottom" id="cQE-vJ-DXP"/>
+                                        </constraints>
+                                    </scrollView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="PNA-dn-jyc" firstAttribute="height" secondItem="Ulu-PG-mnR" secondAttribute="height" priority="250" id="EJt-z6-go8"/>
+                                    <constraint firstItem="zUt-cq-xwv" firstAttribute="leading" secondItem="Ulu-PG-mnR" secondAttribute="leading" id="dXE-ns-SAP"/>
+                                    <constraint firstItem="zUt-cq-xwv" firstAttribute="top" secondItem="Ulu-PG-mnR" secondAttribute="top" id="v8n-9E-M4C"/>
+                                    <constraint firstAttribute="trailing" secondItem="zUt-cq-xwv" secondAttribute="trailing" id="xX8-gT-yej"/>
+                                    <constraint firstAttribute="bottom" secondItem="zUt-cq-xwv" secondAttribute="bottom" id="yLP-iv-uWF"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWZ-fb-NL1" userLabel="Buttons Holder View">
+                                <rect key="frame" x="0.0" y="400" width="320" height="80"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eGe-vp-FjD" userLabel="Chart Data Buttons Holder View">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="80"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E1x-jf-EFf" userLabel="Random values Holder View">
+                                                <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gqa-sS-Zvq">
+                                                        <rect key="frame" x="0.0" y="-0.5" width="160" height="40"/>
+                                                        <state key="normal">
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="Random values">
+                                                                    <attributes>
+                                                                        <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                                <fragment>
+                                                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                                    <attributes>
+                                                                        <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <font key="NSFont" size="11" name="HelveticaNeue-Bold"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                                <fragment content=" (numbers on X ax">
+                                                                    <attributes>
+                                                                        <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <font key="NSFont" size="11" name="HelveticaNeue"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                                <fragment content="is)">
+                                                                    <attributes>
+                                                                        <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <font key="NSFont" size="11" name=".SFNSText"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="generateRandomChartDataWithNumbersOnXAxis:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vH6-Iw-JEA"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.1973726455479452" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="gqa-sS-Zvq" firstAttribute="width" secondItem="E1x-jf-EFf" secondAttribute="width" id="2za-8x-XmT"/>
+                                                    <constraint firstItem="gqa-sS-Zvq" firstAttribute="centerY" secondItem="E1x-jf-EFf" secondAttribute="centerY" id="CNO-r4-d4h"/>
+                                                    <constraint firstItem="gqa-sS-Zvq" firstAttribute="centerX" secondItem="E1x-jf-EFf" secondAttribute="centerX" id="jkD-aH-vYk"/>
+                                                    <constraint firstItem="gqa-sS-Zvq" firstAttribute="height" secondItem="E1x-jf-EFf" secondAttribute="height" id="m6i-fa-6QZ"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pzo-sn-ep5" userLabel="Random Values Holder View">
+                                                <rect key="frame" x="0.0" y="40" width="160" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tAG-Fd-MAg">
+                                                        <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
+                                                        <state key="normal">
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="Random values">
+                                                                    <attributes>
+                                                                        <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                                <fragment>
+                                                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                                    <attributes>
+                                                                        <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <font key="NSFont" size="11" name="HelveticaNeue"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                                <fragment content=" (dates on X axis)">
+                                                                    <attributes>
+                                                                        <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <font key="NSFont" size="11" name="HelveticaNeue-Bold"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="generateRandomChartDataWithDatesOnXAxis:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VaI-1x-DcH"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="tAG-Fd-MAg" firstAttribute="centerX" secondItem="Pzo-sn-ep5" secondAttribute="centerX" id="1H4-wV-vdS"/>
+                                                    <constraint firstItem="tAG-Fd-MAg" firstAttribute="centerY" secondItem="Pzo-sn-ep5" secondAttribute="centerY" id="TET-8P-UNt"/>
+                                                    <constraint firstItem="tAG-Fd-MAg" firstAttribute="width" secondItem="Pzo-sn-ep5" secondAttribute="width" id="f81-yK-PJ5"/>
+                                                    <constraint firstItem="tAG-Fd-MAg" firstAttribute="height" secondItem="Pzo-sn-ep5" secondAttribute="height" id="v3a-qC-pgK"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="Pzo-sn-ep5" firstAttribute="height" secondItem="E1x-jf-EFf" secondAttribute="height" id="5tD-cS-Y0F"/>
+                                            <constraint firstItem="Pzo-sn-ep5" firstAttribute="width" secondItem="eGe-vp-FjD" secondAttribute="width" id="8BS-s7-Df1"/>
+                                            <constraint firstItem="E1x-jf-EFf" firstAttribute="top" secondItem="eGe-vp-FjD" secondAttribute="top" id="GQe-Db-3KQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="Pzo-sn-ep5" secondAttribute="bottom" id="HoU-b7-i5X"/>
+                                            <constraint firstItem="E1x-jf-EFf" firstAttribute="width" secondItem="eGe-vp-FjD" secondAttribute="width" id="T83-ZT-BCe"/>
+                                            <constraint firstItem="Pzo-sn-ep5" firstAttribute="centerX" secondItem="eGe-vp-FjD" secondAttribute="centerX" id="Yeh-gR-dvY"/>
+                                            <constraint firstItem="E1x-jf-EFf" firstAttribute="height" secondItem="eGe-vp-FjD" secondAttribute="height" multiplier="0.5" id="xiR-Zg-5A1"/>
+                                            <constraint firstItem="E1x-jf-EFf" firstAttribute="centerX" secondItem="eGe-vp-FjD" secondAttribute="centerX" id="yQj-82-IXc"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1dE-bF-t2r" userLabel="Chart Settings Buttons Holder View">
+                                        <rect key="frame" x="160" y="0.0" width="160" height="80"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shh-8c-kl0" userLabel="Random Settings Holder View">
+                                                <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pCp-7y-bCX">
+                                                        <rect key="frame" x="0.0" y="-0.5" width="160" height="40"/>
+                                                        <state key="normal">
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="Random settings">
+                                                                    <attributes>
+                                                                        <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="generateRandomChartSettings:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CLI-SJ-zMa"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="pCp-7y-bCX" firstAttribute="centerY" secondItem="shh-8c-kl0" secondAttribute="centerY" id="8gu-b1-3UT"/>
+                                                    <constraint firstItem="pCp-7y-bCX" firstAttribute="centerX" secondItem="shh-8c-kl0" secondAttribute="centerX" id="MZ8-Zl-zdV"/>
+                                                    <constraint firstItem="pCp-7y-bCX" firstAttribute="width" secondItem="shh-8c-kl0" secondAttribute="width" id="OM2-Gm-5ZG"/>
+                                                    <constraint firstItem="pCp-7y-bCX" firstAttribute="height" secondItem="shh-8c-kl0" secondAttribute="height" id="Y5e-CC-rUe"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0D-sm-0w6" userLabel="Change Settings Holder View">
+                                                <rect key="frame" x="0.0" y="40" width="160" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Css-kn-bst">
+                                                        <rect key="frame" x="0.0" y="-0.5" width="160" height="40"/>
+                                                        <state key="normal">
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="Change settings">
+                                                                    <attributes>
+                                                                        <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="changeChartSettings:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GZK-l0-ZW8"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.19574058219178081" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="Css-kn-bst" firstAttribute="height" secondItem="g0D-sm-0w6" secondAttribute="height" id="ONb-3u-J5m"/>
+                                                    <constraint firstItem="Css-kn-bst" firstAttribute="centerX" secondItem="g0D-sm-0w6" secondAttribute="centerX" id="XxI-LY-o4T"/>
+                                                    <constraint firstItem="Css-kn-bst" firstAttribute="centerY" secondItem="g0D-sm-0w6" secondAttribute="centerY" id="fxp-vZ-F3l"/>
+                                                    <constraint firstItem="Css-kn-bst" firstAttribute="width" secondItem="g0D-sm-0w6" secondAttribute="width" id="lds-6A-vEE"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="shh-8c-kl0" firstAttribute="width" secondItem="1dE-bF-t2r" secondAttribute="width" id="6Pp-za-xHM"/>
+                                            <constraint firstItem="shh-8c-kl0" firstAttribute="height" secondItem="1dE-bF-t2r" secondAttribute="height" multiplier="0.5" id="JVo-UL-NWZ"/>
+                                            <constraint firstAttribute="bottom" secondItem="g0D-sm-0w6" secondAttribute="bottom" id="VPg-mt-HPI"/>
+                                            <constraint firstItem="g0D-sm-0w6" firstAttribute="width" secondItem="1dE-bF-t2r" secondAttribute="width" id="bys-zx-sNB"/>
+                                            <constraint firstItem="shh-8c-kl0" firstAttribute="top" secondItem="1dE-bF-t2r" secondAttribute="top" id="cMP-uA-uKn"/>
+                                            <constraint firstItem="g0D-sm-0w6" firstAttribute="height" secondItem="shh-8c-kl0" secondAttribute="height" id="ijf-Ho-wby"/>
+                                            <constraint firstItem="shh-8c-kl0" firstAttribute="centerX" secondItem="1dE-bF-t2r" secondAttribute="centerX" id="mLN-By-aHw"/>
+                                            <constraint firstItem="g0D-sm-0w6" firstAttribute="centerX" secondItem="1dE-bF-t2r" secondAttribute="centerX" id="xGE-GF-6lY"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="eGe-vp-FjD" firstAttribute="height" secondItem="YWZ-fb-NL1" secondAttribute="height" id="0Xs-5m-avV"/>
+                                    <constraint firstItem="1dE-bF-t2r" firstAttribute="width" secondItem="eGe-vp-FjD" secondAttribute="width" id="8Dp-Wy-lse"/>
+                                    <constraint firstItem="eGe-vp-FjD" firstAttribute="centerY" secondItem="YWZ-fb-NL1" secondAttribute="centerY" id="BDp-xU-stW"/>
+                                    <constraint firstAttribute="trailing" secondItem="1dE-bF-t2r" secondAttribute="trailing" id="H3W-gk-NB3"/>
+                                    <constraint firstItem="eGe-vp-FjD" firstAttribute="leading" secondItem="YWZ-fb-NL1" secondAttribute="leading" id="MRn-OZ-VDa"/>
+                                    <constraint firstItem="eGe-vp-FjD" firstAttribute="width" secondItem="YWZ-fb-NL1" secondAttribute="width" multiplier="0.5" id="NnE-cg-XOB"/>
+                                    <constraint firstItem="1dE-bF-t2r" firstAttribute="height" secondItem="YWZ-fb-NL1" secondAttribute="height" id="QTw-ff-IrN"/>
+                                    <constraint firstAttribute="height" constant="80" id="w6a-d0-Jg0"/>
+                                    <constraint firstItem="1dE-bF-t2r" firstAttribute="centerY" secondItem="YWZ-fb-NL1" secondAttribute="centerY" id="wnk-0q-8qy"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.039215686274509803" green="0.5725490196078431" blue="0.94901960784313721" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="YWZ-fb-NL1" firstAttribute="top" secondItem="Ulu-PG-mnR" secondAttribute="bottom" id="5vR-zl-eqb"/>
+                            <constraint firstItem="Ulu-PG-mnR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kcf-b0-qws"/>
+                            <constraint firstItem="Ulu-PG-mnR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Nbv-fe-tvf"/>
+                            <constraint firstItem="YWZ-fb-NL1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Nib-vb-cEk"/>
+                            <constraint firstItem="YWZ-fb-NL1" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="PWE-fF-jRq"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YWZ-fb-NL1" secondAttribute="bottom" id="chn-Pf-eVE"/>
+                            <constraint firstItem="Ulu-PG-mnR" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="ojU-DX-n9w"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Jay-X0-p35">
+                        <nil key="title"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="hcLinearChartView" destination="qwN-Zs-mGJ" id="rz9-Aq-tdg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1293.75" y="366.25"/>
+        </scene>
+        <!--Chart Example Settings View Controller-->
+        <scene sceneID="uyf-3x-UxR">
+            <objects>
+                <viewController storyboardIdentifier="ChartExampleSettingsViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="66M-RW-IUt" customClass="ChartExampleSettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="V4Y-tS-Hga"/>
+                        <viewControllerLayoutGuide type="bottom" id="gAr-O4-QPl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3wV-8G-hgM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="bpV-29-uiJ">
+                                <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="66M-RW-IUt" id="eMF-QO-dfK"/>
+                                    <outlet property="delegate" destination="66M-RW-IUt" id="fI2-xP-Gfl"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.031372549019607843" green="0.63137254901960782" blue="0.94901960784313721" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="bpV-29-uiJ" firstAttribute="width" secondItem="3wV-8G-hgM" secondAttribute="width" id="Lqo-2K-b4U"/>
+                            <constraint firstItem="gAr-O4-QPl" firstAttribute="top" secondItem="bpV-29-uiJ" secondAttribute="bottom" id="aiy-z5-fay"/>
+                            <constraint firstItem="bpV-29-uiJ" firstAttribute="centerX" secondItem="3wV-8G-hgM" secondAttribute="centerX" id="eFP-fR-Pku"/>
+                            <constraint firstItem="bpV-29-uiJ" firstAttribute="top" secondItem="V4Y-tS-Hga" secondAttribute="bottom" id="iCJ-Ge-Ca0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="settingsTableView" destination="bpV-29-uiJ" id="ZIQ-0q-SMz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rqS-6Z-AvF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2081.25" y="366.25"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="umu-mR-68W">
+            <objects>
+                <navigationController id="meL-Uj-lxN" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ijc-LZ-UJN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="zwi-V6-816"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J6U-O0-5b2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="386" y="367"/>
+        </scene>
+    </scenes>
+</document>

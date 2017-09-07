@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsSwitchCell" id="U07-zw-yoZ" customClass="SettingsSwitchCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U07-zw-yoZ" id="PsA-2G-lFt">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9M-Pu-0KX">
+                        <rect key="frame" x="10" y="6" width="103.5" height="31"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1od-Op-SSv">
+                        <rect key="frame" x="261" y="6" width="51" height="31"/>
+                        <color key="onTintColor" red="0.038492838539999998" green="0.57242838539999996" blue="0.94911024310000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <connections>
+                            <action selector="changeSwitch:" destination="U07-zw-yoZ" eventType="valueChanged" id="xrl-mO-AlL"/>
+                        </connections>
+                    </switch>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="1od-Op-SSv" secondAttribute="trailing" constant="10" id="075-IB-scq"/>
+                    <constraint firstItem="c9M-Pu-0KX" firstAttribute="height" secondItem="1od-Op-SSv" secondAttribute="height" id="4dA-0p-rNr"/>
+                    <constraint firstItem="c9M-Pu-0KX" firstAttribute="leading" secondItem="PsA-2G-lFt" secondAttribute="leading" constant="10" id="Y30-ls-gMp"/>
+                    <constraint firstItem="c9M-Pu-0KX" firstAttribute="centerY" secondItem="1od-Op-SSv" secondAttribute="centerY" id="dU7-w2-4BH"/>
+                    <constraint firstItem="1od-Op-SSv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c9M-Pu-0KX" secondAttribute="trailing" constant="10" id="xTX-Vh-kWG"/>
+                    <constraint firstItem="1od-Op-SSv" firstAttribute="centerY" secondItem="PsA-2G-lFt" secondAttribute="centerY" id="xhD-vz-uRA"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="cellLabel" destination="c9M-Pu-0KX" id="rhP-N2-taM"/>
+                <outlet property="cellSwitch" destination="1od-Op-SSv" id="cAf-AR-bq2"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

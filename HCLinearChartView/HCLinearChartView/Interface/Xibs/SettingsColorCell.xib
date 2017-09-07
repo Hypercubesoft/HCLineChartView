@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsColorCell" id="hmh-GF-mJF" customClass="SettingsColorCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hmh-GF-mJF" id="ugu-Qn-w6h">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chart title color" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bly-vU-wo3">
+                        <rect key="frame" x="10" y="11.5" width="119" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mQV-s1-wGU" userLabel="Cell Color View Holder">
+                        <rect key="frame" x="259" y="7.5" width="51" height="30"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSV-sc-cCa" customClass="RoundViewWithBorder">
+                                <rect key="frame" x="10.5" y="0.0" width="30" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXL-IP-JOD">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <connections>
+                                            <action selector="cellChangeColor:" destination="hmh-GF-mJF" eventType="touchUpInside" id="hXd-5w-Yu4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="jSV-sc-cCa" secondAttribute="height" id="2bc-bB-hzi"/>
+                                    <constraint firstItem="nXL-IP-JOD" firstAttribute="centerX" secondItem="jSV-sc-cCa" secondAttribute="centerX" id="HbB-kh-lCj"/>
+                                    <constraint firstItem="nXL-IP-JOD" firstAttribute="width" secondItem="jSV-sc-cCa" secondAttribute="width" id="Pjm-Md-S4g"/>
+                                    <constraint firstItem="nXL-IP-JOD" firstAttribute="height" secondItem="jSV-sc-cCa" secondAttribute="height" id="QON-tb-OX6"/>
+                                    <constraint firstItem="nXL-IP-JOD" firstAttribute="centerY" secondItem="jSV-sc-cCa" secondAttribute="centerY" id="azY-BR-wZd"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderIBColor">
+                                        <color key="value" red="0.031372549020000001" green="0.63137254899999995" blue="0.94901960780000005" alpha="1" colorSpace="deviceRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jSV-sc-cCa" firstAttribute="height" secondItem="mQV-s1-wGU" secondAttribute="height" id="682-Xq-1o4"/>
+                            <constraint firstItem="jSV-sc-cCa" firstAttribute="centerX" secondItem="mQV-s1-wGU" secondAttribute="centerX" id="EHv-Tl-J1S"/>
+                            <constraint firstItem="jSV-sc-cCa" firstAttribute="centerY" secondItem="mQV-s1-wGU" secondAttribute="centerY" id="eOt-TM-df7"/>
+                            <constraint firstAttribute="width" constant="51" id="j7d-6U-bMs"/>
+                            <constraint firstAttribute="height" constant="30" id="svD-Ee-XHf"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="mQV-s1-wGU" secondAttribute="trailing" constant="10" id="Q9Z-ej-pD2"/>
+                    <constraint firstItem="bly-vU-wo3" firstAttribute="centerY" secondItem="ugu-Qn-w6h" secondAttribute="centerY" id="QIN-dw-eLL"/>
+                    <constraint firstItem="bly-vU-wo3" firstAttribute="leading" secondItem="ugu-Qn-w6h" secondAttribute="leading" constant="10" id="Wm2-DI-SoR"/>
+                    <constraint firstItem="mQV-s1-wGU" firstAttribute="centerY" secondItem="ugu-Qn-w6h" secondAttribute="centerY" id="XYy-Qf-lkK"/>
+                    <constraint firstItem="mQV-s1-wGU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bly-vU-wo3" secondAttribute="trailing" constant="5" id="nkd-yp-QH3"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="cellColorView" destination="jSV-sc-cCa" id="nzS-xu-rNg"/>
+                <outlet property="cellLabel" destination="bly-vU-wo3" id="qvs-ep-sft"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>
