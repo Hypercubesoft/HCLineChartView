@@ -122,7 +122,7 @@ If you prefer not to use CocoaPods as a dependency manager, you can integrate HC
     [self.hcLineChartView updateChartWithXElements:xElements yElements:yElements];
     ```
 
-In any case, you can download and run sample project from this repository. In this project, you can find an example of usage which you can use as a template for your projects. This example includes some additional helper classes (HCChartSettings, HCChartData) and additional HCChartLineView methods inside HCLineChartView+SettingsManager category which could help you to better organize your code.
+In any case, you can download and run HCLineChartView Demo project from this repository. In this project, there is an example of usage where you can find out how to use this library.
 
 ## Short preview of HCChartLineView basic parameters and methods
 
