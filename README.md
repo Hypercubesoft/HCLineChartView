@@ -30,8 +30,8 @@ HCLinearChartView provides a lot of possibilities to define the desired design o
 ## CocoaPods:
 ```Ruby
 target '<TargetName>' do
-	use_frameworks!
-	pod 'HCLinearChartView'
+    use_frameworks!
+    pod 'HCLinearChartView'
 end
 ```
 
@@ -76,7 +76,6 @@ If you prefer not to use CocoaPods as a dependency manager, you can integrate HC
     self.hcLinearChartView.chartGradientUnderline = YES;
     self.hcLinearChartView.underLineChartGradientTopColor = [UIColor yellowColor];
     self.hcLinearChartView.underLineChartGradientBottomColor = [UIColor orangeColor];
-    self.hcLinearChartView.isValueChartWithRealXAxisDistribution = YES;
     ```
     You can set all other parameters in the same way.
 5. Setup or update chart data:
