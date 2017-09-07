@@ -2,6 +2,7 @@
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/HCLinearChartView.svg)](http://cocoapods.org/pods/HCLinearChartView)
 [![License](https://img.shields.io/cocoapods/l/HCLinearChartView.svg?style=flat)](http://cocoapods.org/pods/HCLinearChartView)
 [![Platform](https://img.shields.io/cocoapods/p/HCLinHCLinearChartViewearChart.svg?style=flat)](http://cocoapods.org/pods/HCLinearChartView)
+![Objective-c](https://img.shields.io/badge/in-Objective--C-green.svg)
 
 ![GitHub Logo](Images/HCLinearChartView-Logo.png)
 
