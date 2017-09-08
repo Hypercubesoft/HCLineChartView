@@ -6,7 +6,7 @@ s.version          = "1.0.0"
 s.summary          = "HCLineChartView is an iOS library for drawing line charts."
 
 s.description      = <<-DESC
-HCLineChartView is a beautiful iOS library for drawing line charts. It is customizable and easy to use.
+HCLineChartView is a beautiful iOS library which makes it super fast and easy to create and customize line charts.
 DESC
 
 s.homepage         = "https://github.com/Hypercubesoft/HCLineChartView"
