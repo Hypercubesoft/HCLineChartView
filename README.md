@@ -14,7 +14,7 @@ Take a look at the sample app for examples and usage.
 
 ## Examples of usage:
 
-HCLineChartView provides a lot of possibilities to define the desired design of the chart. There are some examples of usage:
+HCLineChartView makes it easy to customize chart line settings and appearance. There are some examples:
 
 ![GitHub Logo](Images/Screenshots/HCLineChartView-Screenshot-1.jpg)
 ![GitHub Logo](Images/Screenshots/HCLineChartView-Screenshot-2.jpg)
@@ -24,7 +24,7 @@ HCLineChartView provides a lot of possibilities to define the desired design of 
 
 ## Features:
 * Easy to set up
-* Easy to customize chart line appearance, i.e. to set up chart line attributes (title, subtitle, colors, gradients, chart line or axis width, font size, ...) directly in interface builder with live preview or from code.
+* Easy to customize chart line settings and appearance, i.e. to set up chart line attributes (title, subtitle, colors, gradients, chart line or axis width, font size, ...) directly in interface builder with live preview or from code.
 * Easy to set or change chart data and reload the chart
 * Automatic detecting if values on the X axis are numerical values or date/time values. Also, it checks if values on the X axis and Y axis are valid.
 * Automatic calculating positions and values for ticks for both axes based on chart data and chart frame.
