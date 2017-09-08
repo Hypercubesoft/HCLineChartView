@@ -266,7 +266,7 @@ By changing these arrays you actually change chart rate data.
 * It's obvious that some attributes turn off some others. For example, if *showSubtitle* is set to NO the subtitle will be hidden, whatever text you set as a *chartSubTitle*. Also, for example, if you set transparent background, you'll not see background gradient, even if you set it.
 * Only NSNumber or NSDate values are allowed for X axis and only NSNumber values for Y axis.
 * Provided values for X axis should be in ascending order. If they aren't or you want to be sure that they are sorted ascending, you should set sortData parameter to YES.
-* You should set a bigger frame for your HCLineChartView, i.e. big enough to draw line chart, both axes, and other elements. Minimal frame depends on chart settings (font size, chart data, the orientation of values on X axis (horizontal or vertical),...).
+* You should set a bigger frame for your HCLineChartView, i.e. big enough to draw chart line, both axes, and other elements. Minimal frame depends on chart settings (font size, chart data, the orientation of values on X axis (horizontal or vertical),...).
 
 
 If you find any bug, please report it, and we will try to fix it ASAP. Also, any suggestion is welcome.
