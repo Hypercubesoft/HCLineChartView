@@ -14,7 +14,7 @@ Take a look at the sample app for examples and usage.
 
 ## Examples of usage:
 
-HCLineChartView makes it easy to customize chart line settings and appearance. There are some examples:
+HCLineChartView makes it easy to customize line chart settings and appearance. There are some examples:
 
 ![GitHub Logo](Images/Screenshots/HCLineChartView-Screenshot-1.jpg)
 ![GitHub Logo](Images/Screenshots/HCLineChartView-Screenshot-2.jpg)
@@ -24,7 +24,7 @@ HCLineChartView makes it easy to customize chart line settings and appearance. T
 
 ## Features:
 * Easy to set up
-* Easy to customize chart line settings and appearance, i.e. to set up chart line attributes (title, subtitle, colors, gradients, chart line or axis width, font size, ...) directly in interface builder with live preview or from code.
+* Easy to customize line chart settings and appearance, i.e. to set up line chart attributes (title, subtitle, colors, gradients, chart line or axis width, font size, ...) directly in interface builder with live preview or from code.
 * Easy to set or change chart data and reload the chart
 * Automatic detecting if values on the X axis are numerical values or date/time values. Also, it checks if values on the X axis and Y axis are valid.
 * Automatic calculating positions and values for ticks for both axes based on chart data and chart frame.
@@ -84,7 +84,7 @@ If you prefer not to use CocoaPods as a dependency manager, you can integrate HC
     [self.view addSubview: hcLineChartView];
     ```
 
-5. If you want to change chart line appearance and basic settings, you can setup chart settings in Interface Builder or from code. You don't have to change these parameters. In that case, the chart will be drawn with default settings. If you still want to customize the chart, you can change multiple attributes (title, subtitle, colors, corner radius, ...) directly from the storyboard or xib file. Also, you can change desired properties directly from the code, like in the following example:
+5. If you want to change line chart appearance and basic settings, you can setup chart settings in Interface Builder or from code. You don't have to change these parameters. In that case, the chart will be drawn with default settings. If you still want to customize the chart, you can change multiple attributes (title, subtitle, colors, corner radius, ...) directly from the storyboard or xib file. Also, you can change desired properties directly from the code, like in the following example:
 
    ```objective-c
     self.hcLineChartView.chartTitle = @"Revenue over time";
@@ -134,11 +134,11 @@ If you prefer not to use CocoaPods as a dependency manager, you can integrate HC
 
 In any case, you can download and run HCLineChartView Demo project from this repository. In this project, there is an example of usage where you can find out how to use this library.
 
-## Short preview of HCChartLineView basic parameters and methods
+## Short preview of HCLineChartView basic parameters and methods
 
-For the better understanding how to use those parameters and methods, here is the short overview of basic HCChartLineView attributes and methods which you can use to setup chart. 
+For the better understanding how to use those parameters and methods, here is the short overview of basic HCLineChartView attributes and methods which you can use to setup chart. 
 
-### HCChartLineView basic attributes
+### HCLineChartView basic attributes
 
 #### Chart Background Settings
 ```objective-c
@@ -209,7 +209,7 @@ For the better understanding how to use those parameters and methods, here is th
 @property IBInspectable BOOL drawHorizontalLinesForYTicks;
 ```
 
-#### Chart Line Settings
+#### HCLineChartView Settings
 ```objective-c
 /// This property defines chart line width.
 @property IBInspectable float chartLineWidth;
@@ -236,7 +236,7 @@ For the better understanding how to use those parameters and methods, here is th
 @property IBInspectable BOOL isValueChartWithRealXAxisDistribution;
 ```
 
-#### Chart Line Data
+#### HCLineChartView Data
 ```objective-c
 /// It is recommended to provide already sorted data before drawing the chart. If you don't have values for X axis sorted ascending, you can set this parameter to YES. In that case, provided values for X axis (xElements) will be sorted ascending, with the parallel sorting of paired values for Y axis (yElements). Sorting data could have a small impact on chart drawing performance.
 @property IBInspectable BOOL sortData;
@@ -249,7 +249,7 @@ For the better understanding how to use those parameters and methods, here is th
 ```
 By changing these arrays you actually change chart rate data.
 
-### HCChartLineView Methods
+### HCLineChartView Methods
 #### Drawing and Updating Methods
 ```objective-c
 /// Draws/redraws chart with current data and settings.
@@ -266,7 +266,7 @@ By changing these arrays you actually change chart rate data.
 * It's obvious that some attributes turn off some others. For example, if *showSubtitle* is set to NO the subtitle will be hidden, whatever text you set as a *chartSubTitle*. Also, for example, if you set transparent background, you'll not see background gradient, even if you set it.
 * Only NSNumber or NSDate values are allowed for X axis and only NSNumber values for Y axis.
 * Provided values for X axis should be in ascending order. If they aren't or you want to be sure that they are sorted ascending, you should set sortData parameter to YES.
-* You should set a bigger frame for your HCLineChartView, i.e. big enough to draw chart line, both axes, and other elements. Minimal frame depends on chart settings (font size, chart data, the orientation of values on X axis (horizontal or vertical),...).
+* You should set a bigger frame for your HCLineChartView, i.e. big enough to draw line chart, both axes, and other elements. Minimal frame depends on chart settings (font size, chart data, the orientation of values on X axis (horizontal or vertical),...).
 
 
 If you find any bug, please report it, and we will try to fix it ASAP. Also, any suggestion is welcome.
