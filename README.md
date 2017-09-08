@@ -194,13 +194,13 @@ For the better understanding how to use those parameters and methods, here is th
 @property IBInspectable BOOL showXValueAsCurrency;
 
 /// TThis property defines currency code for the X axis. It is relevant if showXValueAsCurrency parameter is set to YES. If you don't define currency code or currency code is not valid, the chart will display your local currency code.
-@property (retain, nonatomic) NSString* xAxisCurrencyCode;
+@property (retain, nonatomic) IBInspectable NSString* xAxisCurrencyCode;
 
 /// This property defines if values on the Y axis should be in currency format. It is useful when we need to show exchange rate on the chart (if showXValueAsCurrency is also set to YES), or in any other case where we need to show Y values in currency format (price, saving, debt, surplus, deficit,...)
 @property IBInspectable BOOL showYValueAsCurrency;
 
 /// This property defines currency code for the Y axis. It is relevant if showYValueAsCurrency parameter is set to YES. If you don't define currency code or currency code is not valid, the chart will display your local currency code.
-@property (retain, nonatomic) NSString* yAxisCurrencyCode;
+@property (retain, nonatomic) IBInspectable NSString* yAxisCurrencyCode;
 
 /// This property defines if values on X axis should be presented horizontally (vertically is default).
 @property IBInspectable BOOL horizontalValuesOnXAxis;
