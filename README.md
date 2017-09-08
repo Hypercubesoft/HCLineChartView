@@ -6,7 +6,11 @@
 
 ![GitHub Logo](Images/HCLineChartView-Logo.png)
 
-**HCLineChartView** is a beautiful iOS library for drawing line charts. It is highly customizable and easy to use. 
+**HCLineChartView** is a beautiful iOS library which makes it super fast and easy to create and customize line charts.
+
+With this library, you can fully customize how your line chart looks. It’s easy to setup and use in any iOS project. It supports chart settings directly from interface builder with live preview. Automatic redrawing on orientation change will make it easy for an application that has portrait and landscape layout.
+
+Take a look at the sample app for examples and usage.
 
 ## Examples of usage:
 
@@ -20,11 +24,11 @@ HCLineChartView provides a lot of possibilities to define the desired design of 
 
 ## Features:
 * Easy to set up
-* Easy to change chart line design, i.e. multiple chart line attributes (title, subtitle, colors, gradients, chart line or axis width, font size, ...)
+* Easy to customize chart line appearance, i.e. to set up chart line attributes (title, subtitle, colors, gradients, chart line or axis width, font size, ...) directly in interface builder or from code.
 * Easy to set chart data and reload the chart
 * Automatic detecting if values on the X axis are numerical values or date/time values. Also, it checks if values on the X axis and Y axis are valid.
 * Automatic calculating positions and values for ticks for both axes based on chart data and chart frame.
-* Automatic redrawing on size or orientation change events, without distortions.
+* Automatic redrawing on orientation change events, without distortions.
 
 ## Installing
 
@@ -53,11 +57,17 @@ If you prefer not to use CocoaPods as a dependency manager, you can integrate HC
 ## Usage 
 
 1. Add HCLineChartView library to your project via CocoaPods or manually.
-2. Include HCLineChartView library where it is needed:
+    <br>**Note**: HCLineChartView is a library written in Objective-C, but it can also be added to Swift projects using [Bridging Header](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html).
+2. Include HCLineChartView library where it is needed. If you have installed this library using Podfile, include it using directive:
 
     ```objective-c
     #include <HCLineChartView/HCLineChartView.h>
     ```
+    If you have manually added this library to your project, include it using:
+    ```objective-c
+    #import "HCLineChartView.h"
+    ```
+   
 3. Place a UIView into your .storyboard or .xib file and define HCLineChartView as its class:
 
     ![GitHub Logo](Images/Screenshots/HCLineChartView-Storyboard-Screenshot.png)
