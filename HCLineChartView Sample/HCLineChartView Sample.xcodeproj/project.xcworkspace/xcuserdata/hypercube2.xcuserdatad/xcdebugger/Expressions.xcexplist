@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[HCChartDrawer(CalculationAndPreparation) setupParameters]:HCChartDrawer+CalculationAndPreparation.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "hcLinearChartView.chartLineWidth">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HCChartDrawer(CalculationAndPreparation) prepareVerticalAxisForDrawing]:HCChartDrawer+CalculationAndPreparation.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[HCChartDrawer(CalculationAndPreparation) prepareHorizontalAxisForDrawing]:HCChartDrawer+CalculationAndPreparation.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[HCChartDrawer(Axis) drawValuesAndTicksOnHorizontalAxis]:HCChartDrawer+Axis.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(pointsRectProportionalWidth + pointsRectLeftProportionalDistance) * chartRect.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HCChartDrawer(CalculationAndPreparation) fixCalculationForDrawing]:HCChartDrawer+CalculationAndPreparation.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

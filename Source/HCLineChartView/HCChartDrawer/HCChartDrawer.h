@@ -132,6 +132,12 @@
 /// This property defines array for storing HCTimeStep instances, i.e. potential options for displaying values on X axis if values for X axis are represented as date / time values.
     NSArray<HCTimeStep*>* timeSteps;
     
+/// This property indicates that all values on horizontal (X) axis are equal.
+    BOOL horizontalValuesAreAllEqual;
+    
+/// This property indicates that all values on vertical (Y) axis are equal.
+    BOOL verticalValuesAreAllEqual;
+    
 #pragma mark Chart Dimensions
 /// This property defines relative distance between chart and its borders
     double leftOrBottomOffsetProportional;

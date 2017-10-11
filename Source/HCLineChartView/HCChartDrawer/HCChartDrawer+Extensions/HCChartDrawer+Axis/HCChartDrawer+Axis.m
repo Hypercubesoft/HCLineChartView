@@ -69,7 +69,7 @@
                 xAxisString = hcLineChartView.showXValueAsCurrency ? [self currencyStringForValue:currentValue numberOfDecimalPlaces:numberOfXDecimals currencyCode:hcLineChartView.xAxisCurrencyCode] : [NSString stringWithFormat:decimalFormatX,currentValue];
             }
             textRect = CGRectMake(currentPositionX - xAxisLabelTextSize.width / 2.0, [self bottom] + standardOffset - 5.0, xAxisLabelTextSize.width, xAxisLabelTextSize.height);
-            if (textRect.origin.x > chartCornerRadius && (hcLineChartView.isValueChartWithRealXAxisDistribution ? (hcLineChartView.horizontalValuesOnXAxis ? (textRect.origin.x + textRect.size.width < chartRect.size.width - chartCornerRadius) : YES) : currentPositionX < (pointsRectProportionalWidth + pointsRectLeftProportionalDistance) * chartRect.size.width - chartCornerRadius))
+            if (textRect.origin.x > chartCornerRadius && (hcLineChartView.isValueChartWithRealXAxisDistribution ? (hcLineChartView.horizontalValuesOnXAxis ? (textRect.origin.x + textRect.size.width < chartRect.size.width - chartCornerRadius) : YES) : currentPositionX < (pointsRectProportionalWidth + pointsRectLeftProportionalDistance) * chartRect.size.width))
             {
                 CGSize textSize = [self sizeOfText:xAxisString withFontSize:hcLineChartView.fontSizeForAxis];
                 if (textSize.width > xAxisLabelTextSize.width)

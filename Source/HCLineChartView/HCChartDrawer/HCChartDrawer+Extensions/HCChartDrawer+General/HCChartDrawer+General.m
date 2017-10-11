@@ -49,7 +49,7 @@
 {
     CGColorSpaceRef baseSpace = CGColorSpaceCreateDeviceRGB();
     CGGradientRef gradient = CGGradientCreateWithColorComponents(baseSpace, colors, NULL, 2);
-    CGColorSpaceRelease(baseSpace), baseSpace = NULL;
+    (void)(CGColorSpaceRelease(baseSpace)), baseSpace = NULL;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 0);
@@ -62,7 +62,7 @@
     CGPoint endPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
     
     CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, 0);
-    CGGradientRelease(gradient), gradient = NULL;
+    (void)(CGGradientRelease(gradient)), gradient = NULL;
     
     CGContextRestoreGState(context);
     

@@ -195,6 +195,18 @@
             maxYValue = [[hcLineChartView.yElements objectAtIndex:i] doubleValue];
         }
     }
+    if (minXValue == maxXValue)
+    {
+        minXValue *= 0.99;
+        maxXValue *= 1.01;
+        horizontalValuesAreAllEqual = YES;
+    }
+    if (minYValue == maxYValue)
+    {
+        minYValue *= 0.99;
+        maxYValue *= 1.01;
+        verticalValuesAreAllEqual = YES;
+    }
 }
 
 
@@ -543,7 +555,7 @@
         numberOfDecimalsForXAxis ++;
     }
     startHorizontalValue = tempMinX > 0 ? (((int)tempMinX - (int)tempMinX % (int)tempXAxisTick) / multiplier) : (((int)tempMinX - (int)tempXAxisTick - (int)tempMinX % (int)tempXAxisTick) / multiplier);
-    xStep = fabs(maxXCoordinateOnChart - minXCoordinateOnChart) * xAxisTick/fabs(maxXValue - minXValue);
+    xStep = MAX(fabs(maxXCoordinateOnChart - minXCoordinateOnChart) * xAxisTick/fabs(maxXValue - minXValue), hcLineChartView.fontSizeForAxis);
     [self fixCalculationForDrawing];
 }
 
@@ -559,7 +571,7 @@
     {
         currentPositionX = ((HCChartPoint*)[chartDots firstObject]).x;
         currentValueX = chartType == chartWithNumericalValues ? [[hcLineChartView.xElements firstObject] doubleValue] : [[hcLineChartView.xElements firstObject] timeIntervalSince1970];
-        xStep = fabs(((HCChartPoint*)[chartDots lastObject]).x - ((HCChartPoint*)[chartDots firstObject]).x)/(numberOfElements - 1);
+        xStep = MAX(fabs(((HCChartPoint*)[chartDots lastObject]).x - ((HCChartPoint*)[chartDots firstObject]).x)/(numberOfElements - 1), hcLineChartView.fontSizeForAxis);
     }
     else
     {
@@ -619,6 +631,14 @@
             }
         }
     }
+    if (minXCoordinateOnChart == maxXCoordinateOnChart)
+    {
+        while (currentPositionX > chartRect.size.width * pointsRectLeftProportionalDistance + standardOffset)
+        {
+            currentPositionX -= xStep;
+            currentValueX -= xAxisTick;
+        }
+    }
 }
 
 /// This method prepares vertical axis for drawing
@@ -662,21 +682,28 @@
     hcLineChartView.isValueChartWithRealXAxisDistribution ? fabs(maxXCoordinateOnChart - minXCoordinateOnChart)/(xAxisLabelTextSize.width + 5.0) : MIN(fabs(maxXCoordinateOnChart - minXCoordinateOnChart)/(xAxisLabelTextSize.width + 5.0),numberOfElements) :
     hcLineChartView.isValueChartWithRealXAxisDistribution ? fabs(maxXCoordinateOnChart - minXCoordinateOnChart + hcLineChartView.fontSizeForAxis)/(hcLineChartView.fontSizeForAxis) : MIN(fabs(maxXCoordinateOnChart - minXCoordinateOnChart + hcLineChartView.fontSizeForAxis)/(hcLineChartView.fontSizeForAxis),numberOfElements);
     xAxisTick = numberOfXValues > 0 ? chartType == chartWithDateValues ? xAxisTick: [self findTickForMin:minXValue andMax:maxXValue andNumberOfValues:numberOfXValues isDate:NO] : 1.0;
-    numberOfXDecimals = 0;
-    double potentialTickSize = xAxisTick;
-    while (potentialTickSize < 1.0)
+    double potentialTickSize;
+    if (!horizontalValuesAreAllEqual)
     {
-        potentialTickSize *= 10.0;
-        numberOfXDecimals ++;
+        numberOfXDecimals = 0;
+        potentialTickSize = xAxisTick;
+        while (potentialTickSize < 1.0)
+        {
+            potentialTickSize *= 10.0;
+            numberOfXDecimals ++;
+        }
     }
     int numberOfYValues = fabs(maxYCoordinateOnChart - minYCoordinateOnChart + hcLineChartView.fontSizeForAxis)/(hcLineChartView.fontSizeForAxis);
     yAxisTick = [self findTickForMin:minYValue andMax:maxYValue andNumberOfValues:numberOfYValues isDate:NO];
-    numberOfYDecimals = 0;
-    potentialTickSize = yAxisTick;
-    while (potentialTickSize < 1.0)
+    if (!verticalValuesAreAllEqual)
     {
-        potentialTickSize *= 10.0;
-        numberOfYDecimals ++;
+        numberOfYDecimals = 0;
+        potentialTickSize = yAxisTick;
+        while (potentialTickSize < 1.0)
+        {
+            potentialTickSize *= 10.0;
+            numberOfYDecimals ++;
+        }
     }
 }
 
