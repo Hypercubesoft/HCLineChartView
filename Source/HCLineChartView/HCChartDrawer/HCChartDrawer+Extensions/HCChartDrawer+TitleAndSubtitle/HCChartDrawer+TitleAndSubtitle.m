@@ -27,7 +27,7 @@
 -(void)drawTitleText
 {
     UIFont* titleFont;
-    if ([UIFont respondsToSelector:@selector(systemFontOfSize:weight:)])
+    if (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_8_2)
     {
         titleFont = [UIFont systemFontOfSize:hcLineChartView.fontSizeForTitle weight:2.0];
     }
@@ -57,7 +57,7 @@
 -(void)drawSubTitleText
 {
     UIFont* subtitleFont;
-    if ([UIFont respondsToSelector:@selector(systemFontOfSize:weight:)])
+    if (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_8_2)
     {
         subtitleFont = [UIFont systemFontOfSize:hcLineChartView.fontSizeForSubTitle weight:1.0];
     }
