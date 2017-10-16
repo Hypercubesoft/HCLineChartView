@@ -179,32 +179,79 @@
     minYValue = DBL_MAX;
     maxYValue = -DBL_MAX;
     
+    NSDate* minXDate;
+    NSDate* maxXDate;
+    
     for (int i=0 ; i < numberOfElements ; i++)
     {
         double xValue = chartType == chartWithNumericalValues ? [[hcLineChartView.xElements objectAtIndex:i] doubleValue] : [((NSDate*)[hcLineChartView.xElements objectAtIndex:i]) timeIntervalSince1970];
         if (xValue < minXValue) {
             minXValue = xValue;
+            if (chartType == chartWithDateValues)
+            {
+                minXDate = (NSDate*)[hcLineChartView.xElements objectAtIndex:i];
+            }
         }
         if ([[hcLineChartView.yElements objectAtIndex:i] doubleValue]  < minYValue) {
             minYValue = [[hcLineChartView.yElements objectAtIndex:i] doubleValue];
         }
         if (xValue > maxXValue) {
             maxXValue = xValue;
+            if (chartType == chartWithDateValues)
+            {
+                maxXDate = (NSDate*)[hcLineChartView.xElements objectAtIndex:i];
+            }
         }
         if ([[hcLineChartView.yElements objectAtIndex:i] doubleValue] > maxYValue) {
             maxYValue = [[hcLineChartView.yElements objectAtIndex:i] doubleValue];
         }
     }
-    if (minXValue == maxXValue)
+    if (chartType == chartWithNumericalValues)
     {
-        minXValue *= 0.99;
-        maxXValue *= 1.01;
-        horizontalValuesAreAllEqual = YES;
+        if (minXValue == maxXValue)
+        {
+            if (minXValue == 0)
+            {
+                minXValue += 1.0;
+                maxXValue += 1.0;
+            }
+            minXValue *= 0.99;
+            maxXValue *= 1.01;
+            minXValue -= 1.0;
+            maxXValue -= 1.0;
+            horizontalValuesAreAllEqual = YES;
+        }
+    }
+    else if (chartType == chartWithDateValues)
+    {
+        NSComparisonResult result;
+        result = [[NSDate dateWithTimeIntervalSince1970:(int)[maxXDate timeIntervalSince1970]] compare:[NSDate dateWithTimeIntervalSince1970:(int)[minXDate timeIntervalSince1970]]];
+        
+        if(result==NSOrderedSame)
+        {
+            if (minXValue == 0)
+            {
+                minXValue += 1.0;
+                maxXValue += 1.0;
+            }
+            minXValue += 1.0;
+            maxXValue += 1.0;
+            minXValue -= 1.0;
+            maxXValue -= 1.0;
+            horizontalValuesAreAllEqual = YES;
+        }
     }
     if (minYValue == maxYValue)
     {
+        if (minYValue == 0)
+        {
+            minYValue += 1.0;
+            maxYValue += 1.0;
+        }
         minYValue *= 0.99;
         maxYValue *= 1.01;
+        minYValue -= 1.0;
+        maxYValue -= 1.0;
         verticalValuesAreAllEqual = YES;
     }
 }
@@ -374,12 +421,27 @@
 {
     numberOfXDecimals = 0;
     double range = maxXValue - minXValue;
-    double maxNumberOfValues = chartRect.size.width/(hcLineChartView.fontSizeForAxis);
-    double potentialTickSize = range/maxNumberOfValues;
-    while (potentialTickSize < 1.0)
+    if (range > 0)
     {
-        potentialTickSize *= 10.0;
-        numberOfXDecimals ++;
+        double maxNumberOfValues = chartRect.size.width/(hcLineChartView.fontSizeForAxis);
+        double potentialTickSize = range/maxNumberOfValues;
+        while (potentialTickSize < 1.0)
+        {
+            potentialTickSize *= 10.0;
+            numberOfXDecimals ++;
+        }
+    }
+    else
+    {
+        if (minXValue != 0)
+        {
+            double oneValue = minXValue;
+            while (oneValue < 1)
+            {
+                numberOfXDecimals ++;
+                oneValue *= 10.0;
+            }
+        }
     }
     NSString* decimalFormat = [NSString stringWithFormat:@"%%.%df",numberOfXDecimals];
     NSString* xAxisString1 = hcLineChartView.showXValueAsCurrency ? [self currencyStringForValue:minXValueOnChart numberOfDecimalPlaces:numberOfXDecimals currencyCode:hcLineChartView.xAxisCurrencyCode] : [NSString stringWithFormat:decimalFormat,minXValueOnChart];
@@ -418,13 +480,29 @@
 {
     numberOfYDecimals = 0;
     double range = maxYValue - minYValue;
-    double maxNumberOfValues = chartRect.size.height/(hcLineChartView.fontSizeForAxis);
-    double potentialTickSize = range/maxNumberOfValues;
-    while (potentialTickSize < 1.0)
+    if (range > 0)
     {
-        potentialTickSize *= 10.0;
-        numberOfYDecimals ++;
+        double maxNumberOfValues = chartRect.size.height/(hcLineChartView.fontSizeForAxis);
+        double potentialTickSize = range/maxNumberOfValues;
+        while (potentialTickSize < 1.0)
+        {
+            potentialTickSize *= 10.0;
+            numberOfYDecimals ++;
+        }
     }
+    else
+    {
+        if (minYValue != 0)
+        {
+            double oneValue = minYValue;
+            while (oneValue < 1)
+            {
+                numberOfYDecimals ++;
+                oneValue *= 10.0;
+            }
+        }
+    }
+    
     NSString* decimalFormat = [NSString stringWithFormat:@"%%.%df",numberOfYDecimals];
     NSString* yAxisString1 = hcLineChartView.showYValueAsCurrency ? [self currencyStringForValue:minYValueOnChart numberOfDecimalPlaces:numberOfYDecimals currencyCode:hcLineChartView.yAxisCurrencyCode] : [NSString stringWithFormat:decimalFormat,minYValueOnChart];
     NSString* yAxisString2 = hcLineChartView.showYValueAsCurrency ? [self currencyStringForValue:maxYValueOnChart numberOfDecimalPlaces:numberOfYDecimals currencyCode:hcLineChartView.yAxisCurrencyCode] : [NSString stringWithFormat:decimalFormat,maxYValueOnChart];
@@ -476,10 +554,18 @@
 /// @return Y coordinate
 -(double)yPositionForValue:(double)yValue
 {
-    double yPosition = startVerticalValue - yValue;
-    yPosition *= (chartRect.size.height * pointsRectProportionalHeight - 2 * standardOffset) / (startVerticalValue - endVerticalValue);
-    yPosition += chartRect.size.height * pointsRectTopProportionalDistance + standardOffset;
-    return yPosition;
+    if (startVerticalValue == endVerticalValue)
+    {
+        return chartRect.size.height * (pointsRectTopProportionalDistance + pointsRectProportionalHeight * 0.5) + standardOffset;
+    }
+    else
+    {
+        double yPosition = startVerticalValue - yValue;
+        yPosition *= (chartRect.size.height * pointsRectProportionalHeight - 2 * standardOffset) / (startVerticalValue - endVerticalValue);
+        yPosition += chartRect.size.height * pointsRectTopProportionalDistance + standardOffset;
+        return yPosition;
+    }
+    
 }
 
 /// This method calculates X coordinate / position on chart for X value
@@ -487,10 +573,18 @@
 /// @return X coordinate
 -(double)xPositionForValue:(double)xValue
 {
-    double xPosition = xValue - minXValue;
-    xPosition *= (chartRect.size.width * pointsRectProportionalWidth - 2.0 * standardOffset) / (maxXValue - minXValue);
-    xPosition += chartRect.size.width * pointsRectLeftProportionalDistance + standardOffset;
-    return xPosition;
+    if (horizontalValuesAreAllEqual)
+    {
+        return chartRect.size.width * (pointsRectProportionalWidth * 0.5 + pointsRectLeftProportionalDistance);
+    }
+    else
+    {
+        double xPosition = xValue - minXValue;
+        xPosition *= (chartRect.size.width * pointsRectProportionalWidth - 2.0 * standardOffset) / (maxXValue - minXValue);
+        xPosition += chartRect.size.width * pointsRectLeftProportionalDistance + standardOffset;
+        return xPosition;
+    }
+    
 }
 
 /// This method makes additional calculates related to the initial dots, in order to enable drawing circles
@@ -555,7 +649,7 @@
         numberOfDecimalsForXAxis ++;
     }
     startHorizontalValue = tempMinX > 0 ? (((int)tempMinX - (int)tempMinX % (int)tempXAxisTick) / multiplier) : (((int)tempMinX - (int)tempXAxisTick - (int)tempMinX % (int)tempXAxisTick) / multiplier);
-    xStep = MAX(fabs(maxXCoordinateOnChart - minXCoordinateOnChart) * xAxisTick/fabs(maxXValue - minXValue), hcLineChartView.fontSizeForAxis);
+    xStep = horizontalValuesAreAllEqual ? (chartRect.size.width * pointsRectProportionalWidth - 2.0 * standardOffset) * 0.5 : MAX(fabs(maxXCoordinateOnChart - minXCoordinateOnChart) * xAxisTick/fabs(maxXValue - minXValue), hcLineChartView.fontSizeForAxis);
     [self fixCalculationForDrawing];
 }
 
@@ -563,7 +657,7 @@
 -(void)fixCalculationForDrawing
 {
     currentPositionX = minXCoordinateOnChart;
-    currentValueX = startHorizontalValue;
+    currentValueX = horizontalValuesAreAllEqual ? (chartType == chartWithNumericalValues ? [[hcLineChartView.xElements firstObject] doubleValue] : [[hcLineChartView.xElements firstObject] timeIntervalSince1970]) : startHorizontalValue;
     jumpOverX = 1.0;
     decimalFormatX = [NSString stringWithFormat:@"%%.%df",numberOfXDecimals];
     
@@ -599,7 +693,8 @@
         NSString* timeFormatX = xAxisDateTick.timeFormat;
         int counter = 0;
         BOOL changedMultiplier = NO;
-        for (int i = 0; i < [timeSteps count] - 1; i++)
+        int count = timeSteps != NULL && [timeSteps count] > 0 ? (int)[timeSteps count] - 1 : 0;
+        for (int i = 0; i < count; i++)
         {
             HCTimeStep* singleTimeStep = [timeSteps objectAtIndex:i];
             if (singleTimeStep == xAxisDateTick && xStep < (hcLineChartView.horizontalValuesOnXAxis ? xAxisLabelTextSize.width : hcLineChartView.fontSizeForAxis))
@@ -633,10 +728,18 @@
     }
     if (minXCoordinateOnChart == maxXCoordinateOnChart)
     {
-        while (currentPositionX > chartRect.size.width * pointsRectLeftProportionalDistance + standardOffset)
+        if (horizontalValuesAreAllEqual)
         {
-            currentPositionX -= xStep;
+            currentPositionX = chartRect.size.width * pointsRectLeftProportionalDistance + standardOffset;
             currentValueX -= xAxisTick;
+        }
+        else
+        {
+            while (currentPositionX > chartRect.size.width * pointsRectLeftProportionalDistance + standardOffset)
+            {
+                currentPositionX -= xStep;
+                currentValueX -= xAxisTick;
+            }
         }
     }
 }
@@ -678,7 +781,7 @@
 /// This method calculates tick sizes and recalculates number of decimals for both axes
 -(void)calculateTicks
 {
-    int numberOfXValues = hcLineChartView.horizontalValuesOnXAxis ?
+    int numberOfXValues = horizontalValuesAreAllEqual ? 3 : hcLineChartView.horizontalValuesOnXAxis ?
     hcLineChartView.isValueChartWithRealXAxisDistribution ? fabs(maxXCoordinateOnChart - minXCoordinateOnChart)/(xAxisLabelTextSize.width + 5.0) : MIN(fabs(maxXCoordinateOnChart - minXCoordinateOnChart)/(xAxisLabelTextSize.width + 5.0),numberOfElements) :
     hcLineChartView.isValueChartWithRealXAxisDistribution ? fabs(maxXCoordinateOnChart - minXCoordinateOnChart + hcLineChartView.fontSizeForAxis)/(hcLineChartView.fontSizeForAxis) : MIN(fabs(maxXCoordinateOnChart - minXCoordinateOnChart + hcLineChartView.fontSizeForAxis)/(hcLineChartView.fontSizeForAxis),numberOfElements);
     xAxisTick = numberOfXValues > 0 ? chartType == chartWithDateValues ? xAxisTick: [self findTickForMin:minXValue andMax:maxXValue andNumberOfValues:numberOfXValues isDate:NO] : 1.0;
@@ -723,78 +826,12 @@
 /// @param range Range for tick size calculation
 /// @param numberOfValues Maximal number of values
 /// @param isDate Boolean value which determines if this method has to calculate tick for date/time or for numerical values
+/// @return Optimum tick size for given parameters
 -(double)tickForLargeRange:(double)range withNumberOfValues:(int)numberOfValues isDate:(BOOL)isDate
 {
     if (isDate)
     {
-        timeSteps = [[NSArray<HCTimeStep*> alloc] initWithObjects:
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:1 calendarType:calendarWithSeconds value:1],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:2 calendarType:calendarWithSeconds value:2],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:3 calendarType:calendarWithSeconds value:3],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:4 calendarType:calendarWithSeconds value:4],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:5 calendarType:calendarWithSeconds value:5],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:10 calendarType:calendarWithSeconds value:10],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:15 calendarType:calendarWithSeconds value:15],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:20 calendarType:calendarWithSeconds value:20],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:30 calendarType:calendarWithSeconds value:30],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:60 calendarType:calendarWithMinutes value:1],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:2 * 60 calendarType:calendarWithMinutes value:2],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:3 * 60 calendarType:calendarWithMinutes value:3],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:4 * 60 calendarType:calendarWithMinutes value:4],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:5 * 60 calendarType:calendarWithMinutes value:5],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:10 * 60 calendarType:calendarWithMinutes value:10],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:15 * 60 calendarType:calendarWithMinutes value:15],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:20 * 60 calendarType:calendarWithMinutes value:20],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:30 * 60 calendarType:calendarWithMinutes value:30],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:3600 calendarType:calendarWithHours value:1],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" alternativeTimeFormat:@"dd/MM/yyyy HH:mm:ss" withMultiplier:2 * 3600 calendarType:calendarWithHours value:2 referentRangeForAlternativeText:36 * 3600],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" alternativeTimeFormat:@"dd/MM/yyyy HH:mm:ss" withMultiplier:3 * 3600 calendarType:calendarWithHours value:3 referentRangeForAlternativeText:36 * 3600],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" alternativeTimeFormat:@"dd/MM/yyyy HH:mm:ss" withMultiplier:4 * 3600 calendarType:calendarWithHours value:4 referentRangeForAlternativeText:36 * 3600],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" alternativeTimeFormat:@"dd/MM/yyyy HH:mm:ss" withMultiplier:6 * 3600 calendarType:calendarWithHours value:6 referentRangeForAlternativeText:36 * 3600],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" alternativeTimeFormat:@"dd/MM/yyyy HH:mm:ss" withMultiplier:12 * 3600 calendarType:calendarWithHours value:12 referentRangeForAlternativeText:36 * 3600],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:24 * 3600 calendarType:calendarWithDays value:1],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:48 * 3600 calendarType:calendarWithDays value:2],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:72 * 3600 calendarType:calendarWithDays value:3],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:96 * 3600 calendarType:calendarWithDays value:4],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:120 * 3600 calendarType:calendarWithDays value:5],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:7 * 86400 calendarType:calendarWithWeeks value:1],
-                      [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:240 * 3600 calendarType:calendarWithDays value:10],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:2 * 7 * 86400 calendarType:calendarWithWeeks value:2],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"MM/yyyy" withMultiplier:30.44 * 86400 calendarType:calendarWithMonths value:1],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"MM/yyyy" withMultiplier:2.0 * 30.44 * 86400 calendarType:calendarWithMonths value:2],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"MM/yyyy" withMultiplier:3.0 * 30.44 * 86400 calendarType:calendarWithMonths value:3],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"MM/yyyy" withMultiplier:4.0 * 30.44 * 86400 calendarType:calendarWithMonths value:4],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"MM/yyyy" withMultiplier:6.0 * 30.44 * 86400 calendarType:calendarWithMonths value:6],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:365 * 86400 calendarType:calendarWithYears value:1],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:2 * 365 * 86400 calendarType:calendarWithYears value:2],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:3 * 365 * 86400 calendarType:calendarWithYears value:3],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:4 * 365 * 86400 calendarType:calendarWithYears value:4],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:5 * 365 * 86400 calendarType:calendarWithYears value:5],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:10 * 365 * 86400 calendarType:calendarWithYears value:10],
-                     [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:20 * 365 * 86400 calendarType:calendarWithYears value:100],
-                     nil];
-        for (HCTimeStep* singleTimeStep in timeSteps)
-        {
-            CGSize textSize;
-            if (singleTimeStep.alternativeTimeFormat && range > singleTimeStep.referentRangeForAlternativeText)
-            {
-                singleTimeStep.useAlternativeTimeFormat = YES;
-                textSize = [self sizeOfText:[self timeStringForDate:[NSDate date] withFormat:singleTimeStep.alternativeTimeFormat] withFontSize:hcLineChartView.fontSizeForAxis];
-            }
-            else
-            {
-                textSize = [self sizeOfText:[self timeStringForDate:[NSDate date] withFormat:singleTimeStep.timeFormat] withFontSize:hcLineChartView.fontSizeForAxis];
-            }
-            numberOfValues = chartRect.size.width * pointsRectProportionalWidth / (hcLineChartView.horizontalValuesOnXAxis ? textSize.width : textSize.height);
-            
-            if (singleTimeStep.multiplier * numberOfValues > range && (singleTimeStep.useAlternativeTimeFormat ? numberOfValues > 3 : YES))
-            {
-                xAxisDateTick = singleTimeStep;
-                xAxisTick = [singleTimeStep multiplier];
-                return range / numberOfValues;
-            }
-        }
-        return range/numberOfValues;
+        return [self tickForDateWithRange:range withNumberOfValues:numberOfValues];
     }
     else
     {
@@ -830,36 +867,122 @@
     }
 }
 
+
+
+/// Method for calculating tick size when values are represented as dates
+/// @param range Range for tick size calculation
+/// @param numberOfValues Maximal number of values
+/// @return Optimum tick size for given parameters
+-(double)tickForDateWithRange:(double)range withNumberOfValues:(int)numberOfValues
+{
+    timeSteps = [[NSArray<HCTimeStep*> alloc] initWithObjects:
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:1 calendarType:calendarWithSeconds value:1],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:2 calendarType:calendarWithSeconds value:2],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:3 calendarType:calendarWithSeconds value:3],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:4 calendarType:calendarWithSeconds value:4],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:5 calendarType:calendarWithSeconds value:5],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:10 calendarType:calendarWithSeconds value:10],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:15 calendarType:calendarWithSeconds value:15],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:20 calendarType:calendarWithSeconds value:20],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:30 calendarType:calendarWithSeconds value:30],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:60 calendarType:calendarWithMinutes value:1],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:2 * 60 calendarType:calendarWithMinutes value:2],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:3 * 60 calendarType:calendarWithMinutes value:3],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:4 * 60 calendarType:calendarWithMinutes value:4],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:5 * 60 calendarType:calendarWithMinutes value:5],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:10 * 60 calendarType:calendarWithMinutes value:10],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:15 * 60 calendarType:calendarWithMinutes value:15],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:20 * 60 calendarType:calendarWithMinutes value:20],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:30 * 60 calendarType:calendarWithMinutes value:30],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" withMultiplier:3600 calendarType:calendarWithHours value:1],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" alternativeTimeFormat:@"dd/MM/yyyy HH:mm:ss" withMultiplier:2 * 3600 calendarType:calendarWithHours value:2 referentRangeForAlternativeText:36 * 3600],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" alternativeTimeFormat:@"dd/MM/yyyy HH:mm:ss" withMultiplier:3 * 3600 calendarType:calendarWithHours value:3 referentRangeForAlternativeText:36 * 3600],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" alternativeTimeFormat:@"dd/MM/yyyy HH:mm:ss" withMultiplier:4 * 3600 calendarType:calendarWithHours value:4 referentRangeForAlternativeText:36 * 3600],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" alternativeTimeFormat:@"dd/MM/yyyy HH:mm:ss" withMultiplier:6 * 3600 calendarType:calendarWithHours value:6 referentRangeForAlternativeText:36 * 3600],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"HH:mm:ss" alternativeTimeFormat:@"dd/MM/yyyy HH:mm:ss" withMultiplier:12 * 3600 calendarType:calendarWithHours value:12 referentRangeForAlternativeText:36 * 3600],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:24 * 3600 calendarType:calendarWithDays value:1],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:48 * 3600 calendarType:calendarWithDays value:2],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:72 * 3600 calendarType:calendarWithDays value:3],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:96 * 3600 calendarType:calendarWithDays value:4],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:120 * 3600 calendarType:calendarWithDays value:5],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:7 * 86400 calendarType:calendarWithWeeks value:1],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:240 * 3600 calendarType:calendarWithDays value:10],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"dd/MM/yyyy" withMultiplier:2 * 7 * 86400 calendarType:calendarWithWeeks value:2],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"MM/yyyy" withMultiplier:30.44 * 86400 calendarType:calendarWithMonths value:1],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"MM/yyyy" withMultiplier:2.0 * 30.44 * 86400 calendarType:calendarWithMonths value:2],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"MM/yyyy" withMultiplier:3.0 * 30.44 * 86400 calendarType:calendarWithMonths value:3],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"MM/yyyy" withMultiplier:4.0 * 30.44 * 86400 calendarType:calendarWithMonths value:4],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"MM/yyyy" withMultiplier:6.0 * 30.44 * 86400 calendarType:calendarWithMonths value:6],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:365 * 86400 calendarType:calendarWithYears value:1],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:2 * 365 * 86400 calendarType:calendarWithYears value:2],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:3 * 365 * 86400 calendarType:calendarWithYears value:3],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:4 * 365 * 86400 calendarType:calendarWithYears value:4],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:5 * 365 * 86400 calendarType:calendarWithYears value:5],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:10 * 365 * 86400 calendarType:calendarWithYears value:10],
+                 [[HCTimeStep alloc] initWithTimeFormat:@"yyyy" withMultiplier:20 * 365 * 86400 calendarType:calendarWithYears value:100],
+                 nil];
+    for (HCTimeStep* singleTimeStep in timeSteps)
+    {
+        CGSize textSize;
+        if (singleTimeStep.alternativeTimeFormat && range > singleTimeStep.referentRangeForAlternativeText)
+        {
+            singleTimeStep.useAlternativeTimeFormat = YES;
+            textSize = [self sizeOfText:[self timeStringForDate:[NSDate date] withFormat:singleTimeStep.alternativeTimeFormat] withFontSize:hcLineChartView.fontSizeForAxis];
+        }
+        else
+        {
+            textSize = [self sizeOfText:[self timeStringForDate:[NSDate date] withFormat:singleTimeStep.timeFormat] withFontSize:hcLineChartView.fontSizeForAxis];
+        }
+        numberOfValues = chartRect.size.width * pointsRectProportionalWidth / (hcLineChartView.horizontalValuesOnXAxis ? textSize.width : textSize.height);
+        
+        if (singleTimeStep.multiplier * numberOfValues > range && (singleTimeStep.useAlternativeTimeFormat ? numberOfValues > 3 : YES))
+        {
+            xAxisDateTick = singleTimeStep;
+            xAxisTick = [singleTimeStep multiplier];
+            return range / numberOfValues;
+        }
+    }
+    return range/numberOfValues;
+}
+
 /// This method calculates tick value in case when we have relativelly small numbers on a axis (when range between maximal and minimal value for the axis is lower than 5)
 /// @param range Range for tick size calculation
 /// @param numberOfValues Maximal number of values
--(double)tickForSmallRange:(double)range withNumberOfValues:(int)numberOfValues
+/// @return Optimum tick size for given parameters
+-(double)tickForSmallRange:(double)range withNumberOfValues:(int)numberOfValues isDate:(BOOL)isDate
 {
-    double valueForDifference = range / numberOfValues;
-    double a = 1.0;
-    double b = 2.0;
-    double c = 5.0;
-    while (valueForDifference < a || valueForDifference < b || valueForDifference < c) {
-        c /= 10.0;
-        if (valueForDifference > c)
-        {
-            valueForDifference = a;
-            break;
-        }
-        b /= 10.0;
-        if (valueForDifference > b)
-        {
-            valueForDifference = c;
-            break;
-        }
-        a /= 10.0;
-        if (valueForDifference > a)
-        {
-            valueForDifference = b;
-            break;
-        }
+    if (isDate)
+    {
+        return [self tickForDateWithRange:range withNumberOfValues:numberOfValues];
     }
-    return valueForDifference;
+    else
+    {
+        double valueForDifference = range / numberOfValues;
+        double a = 1.0;
+        double b = 2.0;
+        double c = 5.0;
+        while (valueForDifference < a || valueForDifference < b || valueForDifference < c) {
+            c /= 10.0;
+            if (valueForDifference > c)
+            {
+                valueForDifference = a;
+                break;
+            }
+            b /= 10.0;
+            if (valueForDifference > b)
+            {
+                valueForDifference = c;
+                break;
+            }
+            a /= 10.0;
+            if (valueForDifference > a)
+            {
+                valueForDifference = b;
+                break;
+            }
+        }
+        return valueForDifference;
+    }
 }
 
 /// This method is used for calculating tick values
@@ -874,7 +997,7 @@
     }
     else
     {
-        return [self tickForSmallRange:range withNumberOfValues:numberOfValues];
+        return [self tickForSmallRange:range withNumberOfValues:numberOfValues isDate:isDate];
     }
 }
 

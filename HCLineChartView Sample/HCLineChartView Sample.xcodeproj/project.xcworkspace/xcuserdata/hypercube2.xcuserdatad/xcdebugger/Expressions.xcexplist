@@ -25,7 +25,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[HCChartDrawer(CalculationAndPreparation) calculateHorizontalDimensionsForValues]:HCChartDrawer+CalculationAndPreparation.m">
+      </ContextState>
+      <ContextState
          contextName = "-[HCChartDrawer(CalculationAndPreparation) fixCalculationForDrawing]:HCChartDrawer+CalculationAndPreparation.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "xStep">
+            </PersistentString>
+            <PersistentString
+               value = "currentValueX">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

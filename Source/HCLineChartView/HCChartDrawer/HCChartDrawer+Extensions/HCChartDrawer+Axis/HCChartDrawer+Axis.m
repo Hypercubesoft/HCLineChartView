@@ -158,41 +158,64 @@
 /// This method draws values and ticks on vertical axis
 -(void)drawValuesAndTicksOnVerticalAxis
 {
-    currentValueY = startVerticalValue;
-    double i = startVertical - hcLineChartView.fontSizeForAxis / 2.0;
-    do {
-        if (i > [self topLeftPoint].y && currentValueY >= minYValueOnChart - yAxisTick && i + hcLineChartView.fontSizeForAxis / 2.0 < [self bottom])
+    if (startVerticalValue == endVerticalValue)
+    {
+        NSDictionary* attributes = [self fontAttributesWithFont:[UIFont systemFontOfSize:hcLineChartView.fontSizeForAxis] fontColor:hcLineChartView.chartAxisColor textAlignment:NSTextAlignmentRight andLineBreakMode:NSLineBreakByTruncatingTail];
+        NSString* decimalFormat = [NSString stringWithFormat:@"%%.%df",numberOfYDecimals];
+        NSString* yAxisString = hcLineChartView.showYValueAsCurrency ? [self currencyStringForValue:currentValueY numberOfDecimalPlaces:numberOfYDecimals currencyCode:hcLineChartView.yAxisCurrencyCode] : [NSString stringWithFormat:decimalFormat,currentValueY];
+        CGRect textRect = CGRectMake(
+                                     chartRect.size.width * pointsRectLeftProportionalDistance - yAxisLabelTextSize.width - standardOffset,
+                                     chartRect.size.height * (pointsRectTopProportionalDistance + pointsRectProportionalHeight * 0.5) + standardOffset - yAxisLabelTextSize.height / 2.0,
+                                     yAxisLabelTextSize.width,
+                                     yAxisLabelTextSize.height);
+        CGSize textSize = [self sizeOfText:yAxisString withFontSize:hcLineChartView.fontSizeForAxis];
+        if (textSize.width > yAxisLabelTextSize.width)
         {
-            if (((int)(currentValueY * pow(10, numberOfYDecimals))) == 0)
+            textRect.size.width = textSize.width;
+        }
+        [self drawText:yAxisString withRect:textRect
+         withAtributes:attributes withOffset:CGPointMake(0.0, 0.0) isVertical:NO];
+        
+        [self drawTickAtPosition:chartRect.size.height * (pointsRectTopProportionalDistance + pointsRectProportionalHeight * 0.5) + standardOffset isVertical:YES];
+    }
+    else
+    {
+        currentValueY = startVerticalValue;
+        double i = startVertical - hcLineChartView.fontSizeForAxis / 2.0;
+        do {
+            if (i > [self topLeftPoint].y && currentValueY >= minYValueOnChart - yAxisTick && i + hcLineChartView.fontSizeForAxis / 2.0 < [self bottom])
             {
-                currentValueY = 0;
-            }
-            NSDictionary* attributes = [self fontAttributesWithFont:[UIFont systemFontOfSize:hcLineChartView.fontSizeForAxis] fontColor:hcLineChartView.chartAxisColor textAlignment:NSTextAlignmentRight andLineBreakMode:NSLineBreakByTruncatingTail];
-            NSString* decimalFormat = [NSString stringWithFormat:@"%%.%df",numberOfYDecimals];
-            NSString* yAxisString = hcLineChartView.showYValueAsCurrency ? [self currencyStringForValue:currentValueY numberOfDecimalPlaces:numberOfYDecimals currencyCode:hcLineChartView.yAxisCurrencyCode] : [NSString stringWithFormat:decimalFormat,currentValueY];
-            if (i + yAxisLabelTextSize.height * 0.5 >= [self topLeftPoint].y && i <= [self bottomLeftPoint].y)
-            {
-                CGRect textRect = CGRectMake(
-                                             chartRect.size.width * pointsRectLeftProportionalDistance - yAxisLabelTextSize.width - standardOffset,
-                                             i - yAxisLabelTextSize.height / 2.0,
-                                             yAxisLabelTextSize.width,
-                                             yAxisLabelTextSize.height);
-                CGSize textSize = [self sizeOfText:yAxisString withFontSize:hcLineChartView.fontSizeForAxis];
-                if (textSize.width > yAxisLabelTextSize.width)
+                if (((int)(currentValueY * pow(10, numberOfYDecimals))) == 0)
                 {
-                    textRect.size.width = textSize.width;
+                    currentValueY = 0;
                 }
-                [self drawText:yAxisString withRect:textRect
-                 withAtributes:attributes withOffset:CGPointMake(0.0, 0.0) isVertical:NO];
+                NSDictionary* attributes = [self fontAttributesWithFont:[UIFont systemFontOfSize:hcLineChartView.fontSizeForAxis] fontColor:hcLineChartView.chartAxisColor textAlignment:NSTextAlignmentRight andLineBreakMode:NSLineBreakByTruncatingTail];
+                NSString* decimalFormat = [NSString stringWithFormat:@"%%.%df",numberOfYDecimals];
+                NSString* yAxisString = hcLineChartView.showYValueAsCurrency ? [self currencyStringForValue:currentValueY numberOfDecimalPlaces:numberOfYDecimals currencyCode:hcLineChartView.yAxisCurrencyCode] : [NSString stringWithFormat:decimalFormat,currentValueY];
+                if (i + yAxisLabelTextSize.height * 0.5 >= [self topLeftPoint].y && i <= [self bottomLeftPoint].y)
+                {
+                    CGRect textRect = CGRectMake(
+                                                 chartRect.size.width * pointsRectLeftProportionalDistance - yAxisLabelTextSize.width - standardOffset,
+                                                 i - yAxisLabelTextSize.height / 2.0,
+                                                 yAxisLabelTextSize.width,
+                                                 yAxisLabelTextSize.height);
+                    CGSize textSize = [self sizeOfText:yAxisString withFontSize:hcLineChartView.fontSizeForAxis];
+                    if (textSize.width > yAxisLabelTextSize.width)
+                    {
+                        textRect.size.width = textSize.width;
+                    }
+                    [self drawText:yAxisString withRect:textRect
+                     withAtributes:attributes withOffset:CGPointMake(0.0, 0.0) isVertical:NO];
+                }
+                
+                [self drawTickAtPosition:i + hcLineChartView.fontSizeForAxis / 2.0 isVertical:YES];
             }
             
-            [self drawTickAtPosition:i + hcLineChartView.fontSizeForAxis / 2.0 isVertical:YES];
+            i+= yStep;
+            currentValueY -= yAxisTick;
         }
-        
-        i+= yStep;
-        currentValueY -= yAxisTick;
+        while (i < endVertical);
     }
-    while (i < endVertical);
 }
 
 
