@@ -26,7 +26,16 @@
 /// This method draws chart title
 -(void)drawTitleText
 {
-    NSDictionary* attributes = [self fontAttributesWithFont:[UIFont systemFontOfSize:hcLineChartView.fontSizeForTitle weight:2.0] fontColor:hcLineChartView.chartTitleColor textAlignment:NSTextAlignmentCenter andLineBreakMode:NSLineBreakByTruncatingTail];
+    UIFont* titleFont;
+    if ([UIFont respondsToSelector:@selector(systemFontOfSize:weight:)])
+    {
+        titleFont = [UIFont systemFontOfSize:hcLineChartView.fontSizeForTitle weight:2.0];
+    }
+    else
+    {
+        titleFont = [UIFont boldSystemFontOfSize:hcLineChartView.fontSizeForTitle];
+    }
+    NSDictionary* attributes = [self fontAttributesWithFont:titleFont fontColor:hcLineChartView.chartTitleColor textAlignment:NSTextAlignmentCenter andLineBreakMode:NSLineBreakByTruncatingTail];
     [self drawText:hcLineChartView.chartTitle withRect:[self chartTitleRect] withAtributes:attributes withOffset:CGPointMake(0.0, 0.0) isVertical:NO];
 }
 
@@ -47,7 +56,16 @@
 /// This method draws chart subtitle
 -(void)drawSubTitleText
 {
-    NSDictionary* attributes = [self fontAttributesWithFont:[UIFont systemFontOfSize:hcLineChartView.fontSizeForSubTitle weight:1.0] fontColor:hcLineChartView.chartSubtitleColor textAlignment:NSTextAlignmentCenter andLineBreakMode:NSLineBreakByTruncatingTail];
+    UIFont* subtitleFont;
+    if ([UIFont respondsToSelector:@selector(systemFontOfSize:weight:)])
+    {
+        subtitleFont = [UIFont systemFontOfSize:hcLineChartView.fontSizeForSubTitle weight:1.0];
+    }
+    else
+    {
+        subtitleFont = [UIFont systemFontOfSize:hcLineChartView.fontSizeForSubTitle];
+    }
+    NSDictionary* attributes = [self fontAttributesWithFont:subtitleFont fontColor:hcLineChartView.chartSubtitleColor textAlignment:NSTextAlignmentCenter andLineBreakMode:NSLineBreakByTruncatingTail];
     [self drawText:hcLineChartView.chartSubTitle withRect:[self chartSubtitleRect] withAtributes:attributes withOffset:CGPointMake(0.0, hcLineChartView.fontSizeForTitle + 4.0) isVertical:NO];
 }
 
